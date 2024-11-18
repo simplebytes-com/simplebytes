@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="512" height="512"><svg id="SvgjsSvg1002" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #010101;
+      }
+    </style>
+  </defs>
+  <path class="cls-1" d="M374.57,275.15h-39.52v39.52h-39.52v39.52h-39.52v39.52h-39.52v39.52h-39.52v39.52h-39.52v-78.44h39.52v-39.52h39.52v-39.52h39.52v-39.52h39.52v-39.52h-39.52v-39.52h-39.52v-39.52h-39.52v-39.52h-39.52V39.23h39.52v39.52h39.52v39.52h39.52v39.52h39.52v39.52h39.52v39.52h39.52v39.52-1.22Z"></path>
+</svg><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
+@media (prefers-color-scheme: dark) { :root { filter: invert(100%); } }
+</style></svg>

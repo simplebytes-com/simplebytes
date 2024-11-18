@@ -1,0 +1,203 @@
+/* Variables */
+:root {
+    --bg-color: #fafafa;
+    --text-color: #333;
+    --card-bg: white;
+    --grid-color: rgba(0,0,0,0.03);
+    --shadow-color: rgba(0,0,0,0.05);
+    --hover-shadow: rgba(0,0,0,0.1);
+}
+
+[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #e1e1e1;
+    --card-bg: #2a2a2a;
+    --grid-color: rgba(255,255,255,0.03);
+    --shadow-color: rgba(0,0,0,0.2);
+    --hover-shadow: rgba(0,0,0,0.3);
+}
+
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: var(--bg-color);
+    transition: all 0.3s ease;
+}
+
+/* Typography */
+h1 {
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin-bottom: 4rem;
+    line-height: 1.2;
+    max-width: 600px;
+    color: var(--text-color);
+}
+
+/* Logo */
+.logo-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6rem;
+}
+
+.logo {
+    height: 24px;
+    width: auto;
+    color: var(--text-color);
+}
+
+/* Dark mode toggle */
+.theme-toggle {
+    appearance: none;
+    position: relative;
+    width: 64px;
+    height: 32px;
+    border-radius: 32px;
+    background-color: #e9ecef;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.theme-toggle::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: white;
+    transition: all 0.3s cubic-bezier(.4,0,.2,1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("svg/sun-icon.svg");
+    background-size: 16px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.theme-toggle[aria-checked="true"] {
+    background-color: #4a5568;
+}
+
+.theme-toggle[aria-checked="true"]::before {
+    transform: translateX(32px);
+    background-color: #2d3748;
+    background-image: url("svg/moon-icon.svg");
+}
+
+/* Product list */
+.products {
+    list-style: none;
+}
+
+.product-item {
+    margin-bottom: 2rem;
+    padding: 2rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    background: var(--card-bg);
+    box-shadow: 0 1px 3px var(--shadow-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.product-item:hover {
+    transform: translateX(8px);
+    box-shadow: 0 4px 12px var(--hover-shadow);
+}
+
+.product-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.product-number {
+    font-size: 0.875rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+    font-family: "SF Mono", "Roboto Mono", monospace;
+}
+
+.product-name {
+    font-size: 1.75rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.product-description {
+    color: #666;
+    font-size: 1.125rem;
+    line-height: 1.5;
+}
+
+/* Footer */
+footer {
+    margin-top: 6rem;
+    padding-top: 2rem;
+    font-size: 0.875rem;
+    color: #666;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer a {
+    color: #666;
+    text-decoration: none;
+    border-bottom: 1px dotted #666;
+}
+
+/* Grid background */
+.grid-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+    background-size: 24px 24px;
+    z-index: -1;
+    transition: all 0.3s ease;
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+    body {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .product-item {
+        padding: 1.5rem;
+    }
+
+    .product-name {
+        font-size: 1.5rem;
+    }
+}
