@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const features = [
+    { icon: '📐', title: 'Visual Grid Planning', description: 'Drag and drop to arrange your posts and see how they look together.' },
+    { icon: '🔄', title: 'Easy Reordering', description: 'Quickly rearrange posts until your grid looks perfect.' },
+    { icon: '📤', title: 'Share & Export', description: 'Share your planned grid with clients or team members.' },
+    { icon: '🆓', title: 'Free to Use', description: 'No sign-up required. Start planning immediately.' }
+];
+---
+
+<BaseLayout
+    title="IG Grid Planner - Simple Bytes"
+    description="Quickly plan, organize and share Instagram grids visually."
+>
+    <a href="/" class="back-link">← Back to all projects</a>
+
+    <section class="hero">
+        <h1>IG Grid Planner</h1>
+        <p class="tagline">Quickly plan, organize and share Instagram grids visually. See how your posts will look together before you publish.</p>
+        <div class="hero-links">
+            <a href="https://igplanner.netlify.app?ref=simplebytes" target="_blank" rel="noopener" class="btn btn--primary">
+                Start Planning →
+            </a>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <h2 class="section-title">Plan your perfect grid</h2>
+        <div class="features-grid">
+            {features.map((feature) => (
+                <div class="feature-item">
+                    <span class="feature-icon">{feature.icon}</span>
+                    <h3 class="feature-title">{feature.title}</h3>
+                    <p class="feature-description">{feature.description}</p>
+                </div>
+            ))}
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        margin-bottom: 2rem;
+        transition: color 0.2s;
+    }
+
+    .back-link:hover {
+        color: var(--text-primary);
+    }
+
+    .hero {
+        margin-bottom: 4rem;
+    }
+
+    h1 {
+        font-size: clamp(2.5rem, 6vw, 3.5rem);
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        margin-bottom: 1rem;
+    }
+
+    .tagline {
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        max-width: 600px;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+    }
+
+    .hero-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .features-section {
+        margin-bottom: 2rem;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .feature-item {
+        padding: 0.5rem 0;
+    }
+
+    .feature-icon {
+        font-size: 1.5rem;
+        display: block;
+        margin-bottom: 0.75rem;
+    }
+
+    .feature-title {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.375rem;
+    }
+
+    .feature-description {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 2rem;
+        }
+
+        .tagline {
+            font-size: 1rem;
+        }
+    }
+</style>

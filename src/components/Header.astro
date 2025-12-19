@@ -1,0 +1,73 @@
+---
+---
+
+<header class="header">
+    <a href="/" class="logo-link" aria-label="Simple Bytes Home">
+        <img src="/svg/logo.svg" alt="Simple Bytes" class="logo">
+    </a>
+    <button class="theme-toggle" role="switch" aria-checked="false" aria-label="Toggle dark mode"></button>
+</header>
+
+<style>
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 4rem;
+        padding-top: 0.5rem;
+    }
+
+    .logo {
+        height: 22px;
+        width: auto;
+        transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .logo-link:hover .logo {
+        opacity: 0.6;
+    }
+
+    :global([data-theme="dark"]) .logo {
+        filter: invert(1);
+    }
+
+    .theme-toggle {
+        appearance: none;
+        position: relative;
+        width: 48px;
+        height: 26px;
+        border-radius: 13px;
+        background-color: var(--accent-subtle);
+        border: 1px solid var(--border-color);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        outline: none;
+    }
+
+    .theme-toggle::before {
+        content: '';
+        position: absolute;
+        left: 3px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--accent);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .theme-toggle:hover {
+        border-color: var(--border-hover);
+    }
+
+    .theme-toggle[aria-checked="true"]::before {
+        transform: translateY(-50%) translateX(22px);
+    }
+
+    @media (max-width: 768px) {
+        .header {
+            margin-bottom: 3rem;
+        }
+    }
+</style>

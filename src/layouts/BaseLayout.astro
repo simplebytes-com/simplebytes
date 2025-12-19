@@ -1,0 +1,119 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+    title: string;
+    description?: string;
+    image?: string;
+}
+
+const {
+    title,
+    description = "A portfolio of digital products creating tiny, easy to use tools for better productivity and focus.",
+    image = "/img/og-image.png"
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, "https://simplebytes.com");
+const imageURL = new URL(image, "https://simplebytes.com");
+
+// Structured data for organization
+const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Simple Bytes",
+    "url": "https://simplebytes.com",
+    "logo": "https://simplebytes.com/img/logo.png",
+    "description": "A portfolio of digital products creating tiny, easy to use tools for better productivity and focus.",
+    "sameAs": [
+        "https://github.com/simplebytes-com"
+    ]
+};
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    <meta name="description" content={description}>
+    <meta name="author" content="Simple Bytes">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href={canonicalURL}>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content={canonicalURL}>
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
+    <meta property="og:image" content={imageURL}>
+    <meta property="og:site_name" content="Simple Bytes">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content={title}>
+    <meta name="twitter:description" content={description}>
+    <meta name="twitter:image" content={imageURL}>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/img/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+
+    <!-- Analytics -->
+    <script defer data-domain="simplebytes.com" src="https://analytics.simplebytes.com/js/script.outbound-links.js"></script>
+</head>
+
+<body>
+    <div class="grid-background"></div>
+    <div class="container">
+        <Header />
+        <main>
+            <slot />
+        </main>
+        <Footer />
+    </div>
+
+    <script>
+        // Dark mode functionality
+        const toggle = document.querySelector('.theme-toggle') as HTMLButtonElement;
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+        // Set initial theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark.matches)) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            toggle?.setAttribute('aria-checked', 'true');
+        }
+
+        // Toggle theme
+        toggle?.addEventListener('click', () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                document.documentElement.removeAttribute('data-theme');
+                toggle.setAttribute('aria-checked', 'false');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                toggle.setAttribute('aria-checked', 'true');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    </script>
+</body>
+</html>
+
+<style>
+    main {
+        animation: fadeIn 0.5s ease-out;
+    }
+</style>

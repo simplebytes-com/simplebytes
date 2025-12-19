@@ -1,0 +1,333 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const features = [
+    { icon: '🎨', title: 'Beautiful Design', description: 'Clean, responsive design with light and dark mode support.' },
+    { icon: '📧', title: 'Email Capture', description: 'Built-in email collection with spam bot protection.' },
+    { icon: '🌐', title: 'Multi-Domain', description: 'One deployment serves unlimited domains automatically.' },
+    { icon: '📊', title: 'Privacy Analytics', description: 'Optional Plausible integration for privacy-first analytics.' },
+    { icon: '⚡', title: 'No Backend', description: 'Pure static HTML, CSS, and JavaScript. No database required.' },
+    { icon: '🎛️', title: 'Easy Customization', description: 'CSS variables for theming without any build process.' }
+];
+
+const deployOptions = [
+    'Netlify',
+    'Vercel',
+    'GitHub Pages',
+    'Cloudflare Pages',
+    'Any static host'
+];
+---
+
+<BaseLayout
+    title="Launchpage.xyz - Simple Bytes"
+    description="Free & open source professional landing pages for newly registered domains. Replace empty pages with a clean, professional presence."
+>
+    <a href="/" class="back-link">← Back to all projects</a>
+
+    <section class="hero">
+        <h1>Launchpage.xyz</h1>
+        <p class="tagline">Free & open source professional landing pages for newly registered domains. Replace empty pages or default registrar ads with a clean, professional presence while you build.</p>
+        <div class="hero-badges">
+            <span class="badge badge--opensource">Open Source</span>
+            <span class="badge badge--license">MIT License</span>
+        </div>
+        <div class="hero-links">
+            <a href="https://launchpage.xyz?ref=simplebytes" target="_blank" rel="noopener" class="btn btn--primary">
+                View Demo →
+            </a>
+            <a href="https://github.com/simplebytes-com/launchpage" target="_blank" rel="noopener" class="btn btn--secondary">
+                Get on GitHub
+            </a>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <h2 class="section-title">How It Works</h2>
+        <div class="steps-grid">
+            <div class="step">
+                <span class="step-number">1</span>
+                <h3>Clone or Fork</h3>
+                <p>Get the code from GitHub</p>
+            </div>
+            <div class="step">
+                <span class="step-number">2</span>
+                <h3>Customize</h3>
+                <p>Edit colors, text, and branding</p>
+            </div>
+            <div class="step">
+                <span class="step-number">3</span>
+                <h3>Deploy</h3>
+                <p>Point your domains to your deployment</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <h2 class="section-title">Features</h2>
+        <div class="features-grid">
+            {features.map((feature) => (
+                <div class="feature-item">
+                    <span class="feature-icon">{feature.icon}</span>
+                    <h3 class="feature-title">{feature.title}</h3>
+                    <p class="feature-description">{feature.description}</p>
+                </div>
+            ))}
+        </div>
+    </section>
+
+    <section class="deploy-section">
+        <h2 class="section-title">Deploy Anywhere</h2>
+        <div class="tags-grid">
+            {deployOptions.map((option) => (
+                <span class="deploy-tag">{option}</span>
+            ))}
+        </div>
+        <p class="deploy-note">Works on any platform that serves static files. No special server requirements.</p>
+    </section>
+
+    <section class="opensource-section">
+        <div class="opensource-content">
+            <span class="opensource-icon">💻</span>
+            <h2>100% Free & Open Source</h2>
+            <p>Launchpage is released under the MIT license. No subscriptions, no hidden fees, no costs. Use it for personal projects or commercial domains.</p>
+            <p class="community-note">Built by Simple Bytes with community contributions welcome.</p>
+            <div class="opensource-links">
+                <a href="https://github.com/simplebytes-com/launchpage" target="_blank" rel="noopener" class="btn btn--secondary">
+                    Star on GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        margin-bottom: 2rem;
+        transition: color 0.2s;
+    }
+
+    .back-link:hover {
+        color: var(--text-primary);
+    }
+
+    .hero {
+        margin-bottom: 4rem;
+    }
+
+    h1 {
+        font-size: clamp(2.5rem, 6vw, 3.5rem);
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        margin-bottom: 1rem;
+    }
+
+    .tagline {
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        max-width: 600px;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-badges {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .badge {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 0.375rem 0.75rem;
+        border-radius: var(--radius-sm);
+    }
+
+    .badge--opensource {
+        background: rgba(34, 197, 94, 0.1);
+        color: #16a34a;
+    }
+
+    :global([data-theme="dark"]) .badge--opensource {
+        background: rgba(34, 197, 94, 0.15);
+        color: #4ade80;
+    }
+
+    .badge--license {
+        background: var(--accent-subtle);
+        color: var(--text-secondary);
+    }
+
+    .hero-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    /* How it works */
+    .how-it-works {
+        margin-bottom: 4rem;
+    }
+
+    .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+
+    .step {
+        text-align: center;
+        padding: 1.5rem;
+    }
+
+    .step-number {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        background: var(--accent);
+        color: var(--bg-color);
+        border-radius: 50%;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .step h3 {
+        font-size: 1.125rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .step p {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+    }
+
+    /* Features */
+    .features-section {
+        margin-bottom: 4rem;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+
+    .feature-item {
+        padding: 0.5rem 0;
+    }
+
+    .feature-icon {
+        font-size: 1.5rem;
+        display: block;
+        margin-bottom: 0.75rem;
+    }
+
+    .feature-title {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.375rem;
+    }
+
+    .feature-description {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+    }
+
+    /* Deploy section */
+    .deploy-section {
+        margin-bottom: 4rem;
+    }
+
+    .tags-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .deploy-tag {
+        padding: 0.5rem 1rem;
+        background: var(--accent-subtle);
+        border-radius: var(--radius-md);
+        font-size: 0.875rem;
+        color: var(--text-primary);
+    }
+
+    .deploy-note {
+        font-size: 0.875rem;
+        color: var(--text-tertiary);
+    }
+
+    /* Open source section */
+    .opensource-section {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-xl);
+        padding: 2.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .opensource-content {
+        max-width: 600px;
+    }
+
+    .opensource-icon {
+        font-size: 2rem;
+        display: block;
+        margin-bottom: 1rem;
+    }
+
+    .opensource-content h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .opensource-content p {
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+
+    .community-note {
+        font-weight: 500;
+        color: var(--text-primary) !important;
+    }
+
+    .opensource-links {
+        margin-top: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 2rem;
+        }
+
+        .tagline {
+            font-size: 1rem;
+        }
+
+        .steps-grid,
+        .features-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .opensource-section {
+            padding: 1.5rem;
+        }
+    }
+</style>

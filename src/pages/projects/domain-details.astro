@@ -1,0 +1,420 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const subProjects = [
+    {
+        name: 'Marketplace Search',
+        description: 'Real-time checking across 8+ domain marketplaces including Afternic, Sedo, Namecheap, and more.',
+        icon: '🏪',
+        href: 'https://www.domaindetails.com/marketplace?ref=simplebytes',
+        tag: 'free' as const
+    },
+    {
+        name: 'Browser Extension',
+        description: 'Instantly check domain details while browsing. Available for Chrome.',
+        icon: '🧩',
+        href: 'https://www.domaindetails.com/extension?ref=simplebytes',
+        tag: 'free' as const
+    },
+    {
+        name: 'Portfolio',
+        description: 'Manage your domain portfolio. Track valuations, expirations, and organize your investments.',
+        icon: '📁',
+        href: 'https://portfolio.domaindetails.com?ref=simplebytes',
+        tag: 'free' as const
+    },
+    {
+        name: 'Domain Details Academy',
+        description: 'Free courses including Domain Fundamentals (12 lessons), Domain Investing (17 lessons), and Domain Security (9 lessons).',
+        icon: '🎓',
+        href: 'https://www.domaindetails.com/academy?ref=simplebytes',
+        tag: 'free' as const
+    },
+    {
+        name: 'MCP & NPM',
+        description: 'Connect AI agents and developer tools to domain data. MCP server for Claude and other LLMs.',
+        icon: '📦',
+        href: 'https://www.domaindetails.com/developers?ref=simplebytes',
+        tag: 'opensource' as const
+    },
+    {
+        name: 'GitHub',
+        description: 'Open source repositories and community projects.',
+        icon: '💻',
+        href: 'https://github.com/simplebytes-com',
+        tag: 'opensource' as const
+    }
+];
+
+const features = [
+    { icon: '🔍', title: 'WHOIS & RDAP Lookup', description: 'Check registration, ownership, expiration dates, and nameservers using modern RDAP protocol.' },
+    { icon: '🌐', title: 'DNS Records', description: 'View A, MX, CNAME, TXT, and other DNS configurations for any domain.' },
+    { icon: '🔐', title: 'SSL Certificates', description: 'Inspect SSL certificate details, expiration, and security status.' },
+    { icon: '🏪', title: 'Marketplace Search', description: 'Real-time checking across Afternic, Sedo, Namecheap, Dynadot, NameSilo, and more.' },
+    { icon: '💰', title: 'Price Comparison', description: 'Compare domain listings and auction prices across multiple marketplaces.' },
+    { icon: '📊', title: 'Bulk Lookup', description: 'Process multiple domains simultaneously for efficient research.' },
+    { icon: '🌍', title: '1,500+ TLDs', description: 'Support for over 1,500 top-level domains with complete registrar data.' },
+    { icon: '📜', title: 'Wayback Integration', description: 'Access historical website snapshots and archival data from the Wayback Machine.' },
+    { icon: '🔔', title: 'Domain Monitoring', description: 'Track WHOIS changes, nameserver updates, and expiration dates with instant alerts.' },
+    { icon: '📧', title: 'Email Notifications', description: 'Get instant email alerts when monitored domains change.' },
+    { icon: '📈', title: '90-Day History', description: 'View all domain modifications with visual diffs and change tracking.' },
+    { icon: '🔒', title: 'Privacy First', description: 'Local-first design. Queries go directly to registries. Zero data sold.' }
+];
+
+const highlights = [
+    'Unlimited Lookups',
+    'WHOIS & RDAP',
+    'DNS Records',
+    'SSL Certificates',
+    '1,500+ TLDs',
+    '8+ Marketplaces',
+    'Wayback Machine',
+    'Bulk Lookup',
+    'Portfolio Manager',
+    'TLD Database',
+    'Browser Extension',
+    'Academy (38 Lessons)',
+    'MCP Server',
+    'NPM Packages'
+];
+
+const successStories = [
+    { domain: 'Chat.com', price: '$15.5M' },
+    { domain: 'Icon.com', price: '$12M' },
+    { domain: 'Public.com', price: '$900K' },
+    { domain: 'Somewhere.com', price: '$400K' },
+    { domain: 'Paddle.com', price: '$275K' },
+    { domain: 'Zip.ai', price: '$200K' },
+    { domain: 'Loom.com', price: '$150K' },
+    { domain: 'OS.ai', price: '$150K' },
+    { domain: 'Proxyman.com', price: '$120K' },
+    { domain: 'Cursor.com', price: '$60K' }
+];
+---
+
+<BaseLayout
+    title="Domain Details - Simple Bytes"
+    description="Free private domain lookup using RDAP & WHOIS. Check registration, ownership, expiration, DNS records, and marketplace availability."
+>
+    <a href="/" class="back-link">← Back to all projects</a>
+
+    <section class="hero">
+        <h1>Domain Details</h1>
+        <p class="tagline">Free private domain lookup using RDAP & WHOIS. Check registration, ownership, expiration, DNS records, and marketplace availability.</p>
+        <div class="highlights-row">
+            {highlights.map((item) => (
+                <span class="highlight-tag">{item}</span>
+            ))}
+        </div>
+        <div class="hero-links">
+            <a href="https://www.domaindetails.com?ref=simplebytes" target="_blank" rel="noopener" class="btn btn--primary">
+                Try Domain Details →
+            </a>
+            <a href="https://github.com/simplebytes-com" target="_blank" rel="noopener" class="btn btn--secondary">
+                View on GitHub
+            </a>
+        </div>
+    </section>
+
+    <section class="sub-projects-section">
+        <h2 class="section-title">What's Included</h2>
+        <p class="section-description">Domain Details has grown into a complete suite of tools for domain professionals, developers, and enthusiasts.</p>
+        <div class="sub-projects-grid">
+            {subProjects.map((sub) => (
+                <a href={sub.href} target="_blank" rel="noopener" class="sub-project-card">
+                    <span class="sub-project-icon">{sub.icon}</span>
+                    <h3 class="sub-project-name">{sub.name}</h3>
+                    <p class="sub-project-description">{sub.description}</p>
+                    <span class={`tag tag--${sub.tag}`}>
+                        {sub.tag === 'opensource' ? 'Open Source' : sub.tag}
+                    </span>
+                </a>
+            ))}
+        </div>
+    </section>
+
+    <section class="features-section">
+        <h2 class="section-title">Core Features</h2>
+        <div class="features-grid">
+            {features.map((feature) => (
+                <div class="feature-item">
+                    <span class="feature-icon">{feature.icon}</span>
+                    <h3 class="feature-title">{feature.title}</h3>
+                    <p class="feature-description">{feature.description}</p>
+                </div>
+            ))}
+        </div>
+    </section>
+
+    <section class="opensource-section">
+        <div class="opensource-header">
+            <span class="opensource-icon">💻</span>
+            <h2>Open Source & Developer Tools</h2>
+        </div>
+        <p class="opensource-description">
+            We believe in giving back to the community. Domain Details offers open source packages and developer tools to help you build domain-related applications.
+        </p>
+        <div class="opensource-links">
+            <a href="https://www.npmjs.com/org/domaindetails" target="_blank" rel="noopener" class="btn btn--secondary">
+                📦 NPM Packages
+            </a>
+            <a href="https://github.com/simplebytes-com" target="_blank" rel="noopener" class="btn btn--secondary">
+                GitHub
+            </a>
+            <a href="https://www.domaindetails.com/docs?ref=simplebytes" target="_blank" rel="noopener" class="btn btn--secondary">
+                API Docs
+            </a>
+        </div>
+    </section>
+
+    <section class="success-section">
+        <h2 class="section-title">Domain Success Stories</h2>
+        <p class="section-description">Learn from premium domain sales featured in the Academy.</p>
+        <div class="success-grid">
+            {successStories.map((story) => (
+                <div class="success-card">
+                    <span class="success-domain">{story.domain}</span>
+                    <span class="success-price">{story.price}</span>
+                </div>
+            ))}
+        </div>
+    </section>
+
+    </BaseLayout>
+
+<style>
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        margin-bottom: 2rem;
+        transition: color 0.2s;
+    }
+
+    .back-link:hover {
+        color: var(--text-primary);
+    }
+
+    .hero {
+        margin-bottom: 4rem;
+    }
+
+    h1 {
+        font-size: clamp(2.5rem, 6vw, 3.5rem);
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        margin-bottom: 1rem;
+    }
+
+    .tagline {
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        max-width: 600px;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+    }
+
+    .highlights-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .highlight-tag {
+        padding: 0.375rem 0.75rem;
+        background: var(--accent-subtle);
+        border-radius: var(--radius-md);
+        font-size: 0.8125rem;
+        color: var(--text-primary);
+        font-weight: 500;
+    }
+
+    .hero-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    /* Sub-projects section */
+    .sub-projects-section {
+        margin-bottom: 4rem;
+    }
+
+    .sub-projects-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+
+    .sub-project-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        padding: 1.5rem;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.3s;
+    }
+
+    .sub-project-card:hover {
+        border-color: var(--border-hover);
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+    }
+
+    .sub-project-icon {
+        font-size: 2rem;
+        display: block;
+        margin-bottom: 1rem;
+    }
+
+    .sub-project-name {
+        font-size: 1.125rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .sub-project-card:hover .sub-project-name {
+        color: var(--accent-hover);
+    }
+
+    .sub-project-description {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+        margin-bottom: 1rem;
+    }
+
+    /* Features section */
+    .features-section {
+        margin-bottom: 4rem;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+    }
+
+    .feature-item {
+        padding: 0.5rem 0;
+    }
+
+    .feature-icon {
+        font-size: 1.5rem;
+        display: block;
+        margin-bottom: 0.75rem;
+    }
+
+    .feature-title {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.375rem;
+    }
+
+    .feature-description {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+    }
+
+    /* Open source section */
+    .opensource-section {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-xl);
+        padding: 2.5rem;
+        margin-bottom: 4rem;
+    }
+
+    .opensource-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .opensource-icon {
+        font-size: 2rem;
+    }
+
+    .opensource-header h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    .opensource-description {
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+        max-width: 600px;
+    }
+
+    .opensource-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    /* Success stories */
+    .success-section {
+        margin-bottom: 4rem;
+    }
+
+    .success-grid {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .success-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-md);
+        padding: 1rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .success-domain {
+        font-weight: 600;
+        font-size: 1rem;
+    }
+
+    .success-price {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+    }
+
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 2rem;
+        }
+
+        .tagline {
+            font-size: 1rem;
+        }
+
+        .sub-projects-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .features-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .opensource-section {
+            padding: 1.5rem;
+        }
+
+        .opensource-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+    }
+</style>

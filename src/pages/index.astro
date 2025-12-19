@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+const projects = [
+    {
+        number: '01',
+        name: 'Domain Details',
+        description: 'The complete domain intelligence platform with WHOIS lookup, marketplace search, and developer tools.',
+        href: '/projects/domain-details',
+        externalHref: 'https://www.domaindetails.com?ref=simplebytes',
+        subProjects: [
+            { name: 'Marketplace Search', icon: '🏪', href: 'https://www.domaindetails.com/marketplace?ref=simplebytes', tag: 'free' as const },
+            { name: 'Browser Extension', icon: '🧩', href: 'https://www.domaindetails.com/extension?ref=simplebytes', tag: 'free' as const },
+            { name: 'Portfolio', icon: '📁', href: 'https://portfolio.domaindetails.com?ref=simplebytes', tag: 'free' as const },
+            { name: 'Academy', icon: '🎓', href: 'https://www.domaindetails.com/academy?ref=simplebytes', tag: 'free' as const },
+            { name: 'MCP & NPM', icon: '📦', href: 'https://www.domaindetails.com/developers?ref=simplebytes', tag: 'opensource' as const },
+            { name: 'GitHub', icon: '💻', href: 'https://github.com/simplebytes-com', tag: 'opensource' as const },
+        ]
+    },
+    {
+        number: '02',
+        name: 'Doodlify',
+        description: 'Turn your photos into cute, 2D flat & colorful doodles with AI.',
+        href: '/projects/doodlify',
+        externalHref: 'https://www.doodlify.ai?ref=simplebytes',
+        subProjects: []
+    },
+    {
+        number: '03',
+        name: 'IG Grid Planner',
+        description: 'Quickly plan, organize and share Instagram grids visually.',
+        href: '/projects/ig-grid-planner',
+        externalHref: 'https://igplanner.netlify.app?ref=simplebytes',
+        subProjects: []
+    },
+    {
+        number: '04',
+        name: 'EasyChef.ai',
+        description: 'Generate personalized recipes based on ingredients you have.',
+        href: '/projects/easychef',
+        externalHref: 'https://easychef.ai?ref=simplebytes',
+        subProjects: []
+    },
+    {
+        number: '05',
+        name: 'Launchpage.xyz',
+        description: 'Free & open source landing pages for newly registered domains.',
+        href: '/projects/launchpage',
+        externalHref: 'https://launchpage.xyz?ref=simplebytes',
+        subProjects: []
+    }
+];
+---
+
+<BaseLayout title="Simple Bytes - Digital Tools That Respect Your Time">
+    <div class="hero">
+        <h1>Simple Bytes</h1>
+        <p class="tagline">A portfolio of digital products creating tiny, easy to use tools for better productivity and focus.</p>
+    </div>
+
+    <p class="section-label">Projects</p>
+
+    <div class="projects">
+        {projects.map((project) => (
+            <ProjectCard
+                number={project.number}
+                name={project.name}
+                description={project.description}
+                href={project.href}
+                externalHref={project.externalHref}
+                subProjects={project.subProjects}
+            />
+        ))}
+    </div>
+</BaseLayout>
+
+<style>
+    .hero {
+        margin-bottom: 4rem;
+    }
+
+    h1 {
+        font-size: clamp(2rem, 5vw, 2.75rem);
+        font-weight: 600;
+        line-height: 1.2;
+        letter-spacing: -0.03em;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+    }
+
+    .tagline {
+        font-size: 1.125rem;
+        color: var(--text-secondary);
+        max-width: 500px;
+        line-height: 1.6;
+    }
+
+    .projects {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    @media (max-width: 768px) {
+        .hero {
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+        }
+
+        .tagline {
+            font-size: 1rem;
+        }
+
+        .projects {
+            gap: 1rem;
+        }
+    }
+</style>

@@ -1,0 +1,185 @@
+---
+import SubProjectCard from './SubProjectCard.astro';
+
+interface SubProject {
+    name: string;
+    description: string;
+    href: string;
+    icon: string;
+    tag?: 'free' | 'opensource' | 'pro';
+}
+
+interface Props {
+    number: string;
+    name: string;
+    description: string;
+    href: string;
+    externalHref?: string;
+    subProjects?: SubProject[];
+}
+
+const { number, name, description, href, externalHref, subProjects = [] } = Astro.props;
+const hasSubProjects = subProjects.length > 0;
+---
+
+<article class="project-card">
+    <a href={href} class="project-header">
+        <div class="project-number">{number}</div>
+        <div class="project-content">
+            <h2 class="project-name">{name}</h2>
+            <p class="project-description">{description}</p>
+        </div>
+        <span class="project-arrow">→</span>
+    </a>
+
+    {externalHref && (
+        <div class="external-link-row">
+            <a href={externalHref} target="_blank" rel="noopener" class="external-link">
+                Visit {name} ↗
+            </a>
+        </div>
+    )}
+
+    {hasSubProjects && (
+        <div class="sub-projects">
+            {subProjects.map((sub) => (
+                <SubProjectCard
+                    name={sub.name}
+                    description={sub.description}
+                    href={sub.href}
+                    icon={sub.icon}
+                    tag={sub.tag}
+                />
+            ))}
+        </div>
+    )}
+</article>
+
+<style>
+    .project-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+    }
+
+    .project-card:hover {
+        border-color: var(--border-hover);
+        box-shadow: var(--shadow-md);
+    }
+
+    .project-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.25rem;
+        padding: 1.5rem;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .project-number {
+        font-family: 'Geist Mono', monospace;
+        font-size: 0.75rem;
+        font-weight: 400;
+        color: var(--text-tertiary);
+        background: var(--accent-subtle);
+        padding: 0.5rem 0.75rem;
+        border-radius: var(--radius-sm);
+        flex-shrink: 0;
+    }
+
+    .project-content {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .project-name {
+        font-size: 1.375rem;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+        transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .project-card:hover .project-name {
+        color: var(--accent-hover);
+    }
+
+    .project-description {
+        font-size: 0.9375rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+    }
+
+    .project-arrow {
+        font-size: 1.25rem;
+        color: var(--text-tertiary);
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        flex-shrink: 0;
+        margin-top: 0.25rem;
+    }
+
+    .project-card:hover .project-arrow {
+        color: var(--text-primary);
+        transform: translateX(4px);
+    }
+
+    .external-link-row {
+        padding: 0 1.5rem 1.5rem;
+        border-top: 1px solid var(--border-color);
+        padding-top: 1rem;
+        margin-top: -0.5rem;
+    }
+
+    .external-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+    .external-link:hover {
+        color: var(--accent-hover);
+    }
+
+    .sub-projects {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        padding: 0 1.5rem 1.5rem;
+        border-top: 1px solid var(--border-color);
+        padding-top: 1rem;
+        margin-top: -0.5rem;
+    }
+
+    @media (max-width: 768px) {
+        .project-header {
+            padding: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .project-number {
+            order: -1;
+        }
+
+        .project-content {
+            flex-basis: 100%;
+            margin-top: 0.5rem;
+        }
+
+        .project-arrow {
+            display: none;
+        }
+
+        .sub-projects {
+            grid-template-columns: 1fr;
+            padding: 0 1.25rem 1.25rem;
+        }
+    }
+</style>

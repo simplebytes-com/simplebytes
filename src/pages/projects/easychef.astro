@@ -1,0 +1,415 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const features = [
+    { icon: '🥗', title: 'Ingredient-Based', description: 'Tell us what you have, get recipes that use those ingredients.' },
+    { icon: '🌍', title: 'Global Cuisines', description: 'Mexican, Indian, Italian, and cuisines from around the world.' },
+    { icon: '🥦', title: 'Diet Preferences', description: 'Supports gluten-free, paleo, vegan, and custom dietary needs.' },
+    { icon: '🍳', title: 'Equipment Aware', description: 'Considers your available cooking equipment - microwave, oven, stovetop.' }
+];
+
+const benefits = [
+    { icon: '🛒', title: 'Skip the Store', description: 'No more extra shopping trips. Cook with what you have.' },
+    { icon: '🎯', title: 'Tailored for You', description: 'Recipes matched to your preferences and equipment.' },
+    { icon: '♻️', title: 'Reduce Waste', description: 'Maximize your groceries and minimize food waste.' }
+];
+
+const stats = [
+    { value: '1K+', label: 'Active Cooks' },
+    { value: '€2.99', label: '/month' },
+    { value: '€29.99', label: '/year' }
+];
+---
+
+<BaseLayout
+    title="EasyChef.ai - Simple Bytes"
+    description="Generate personalized recipes based on ingredients you have. AI-powered cooking assistant for iOS and Android."
+>
+    <a href="/" class="back-link">← Back to all projects</a>
+
+    <section class="hero">
+        <h1>EasyChef.ai</h1>
+        <p class="tagline">Generate personalized recipes based on ingredients you have. No more wondering what to cook - just tell us what's in your kitchen.</p>
+        <div class="hero-badges">
+            <span class="badge badge--acquisition">Our First Acquisition</span>
+            <span class="badge badge--platform">iOS & Android</span>
+        </div>
+        <div class="hero-links">
+            <a href="https://easychef.ai?ref=simplebytes" target="_blank" rel="noopener" class="btn btn--primary">
+                Get EasyChef →
+            </a>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <h2 class="section-title">How It Works</h2>
+        <div class="steps-grid">
+            <div class="step">
+                <span class="step-number">1</span>
+                <h3>Select Ingredients</h3>
+                <p>Choose what you have or want to use</p>
+            </div>
+            <div class="step">
+                <span class="step-number">2</span>
+                <h3>Browse Recipes</h3>
+                <p>AI generates options based on your preferences</p>
+            </div>
+            <div class="step">
+                <span class="step-number">3</span>
+                <h3>Start Cooking</h3>
+                <p>Follow step-by-step instructions</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits-section">
+        <h2 class="section-title">Why EasyChef?</h2>
+        <div class="benefits-grid">
+            {benefits.map((benefit) => (
+                <div class="benefit-card">
+                    <span class="benefit-icon">{benefit.icon}</span>
+                    <h3>{benefit.title}</h3>
+                    <p>{benefit.description}</p>
+                </div>
+            ))}
+        </div>
+    </section>
+
+    <section class="features-section">
+        <h2 class="section-title">Features</h2>
+        <div class="features-grid">
+            {features.map((feature) => (
+                <div class="feature-item">
+                    <span class="feature-icon">{feature.icon}</span>
+                    <h3 class="feature-title">{feature.title}</h3>
+                    <p class="feature-description">{feature.description}</p>
+                </div>
+            ))}
+        </div>
+    </section>
+
+    <section class="pricing-section">
+        <h2 class="section-title">Simple Pricing</h2>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Monthly</h3>
+                <p class="pricing-price">€2.99<span>/month</span></p>
+                <p class="pricing-description">Full access to all features</p>
+            </div>
+            <div class="pricing-card pricing-card--popular">
+                <span class="popular-badge">Save 17%</span>
+                <h3>Annual</h3>
+                <p class="pricing-price">€29.99<span>/year</span></p>
+                <p class="pricing-description">Best value for home cooks</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="acquisition-section">
+        <div class="acquisition-content">
+            <span class="acquisition-icon">🎉</span>
+            <h2>Joining the Simple Bytes Family</h2>
+            <p>EasyChef.ai is our first acquisition. We're excited to bring it into the Simple Bytes portfolio and committed to maintaining and improving the product while keeping it accessible for home cooks everywhere.</p>
+            <p class="community-stat">Join over 1,000 active home cooks already using EasyChef.</p>
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        margin-bottom: 2rem;
+        transition: color 0.2s;
+    }
+
+    .back-link:hover {
+        color: var(--text-primary);
+    }
+
+    .hero {
+        margin-bottom: 4rem;
+    }
+
+    h1 {
+        font-size: clamp(2.5rem, 6vw, 3.5rem);
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        margin-bottom: 1rem;
+    }
+
+    .tagline {
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        max-width: 600px;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-badges {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .badge {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 0.375rem 0.75rem;
+        border-radius: var(--radius-sm);
+    }
+
+    .badge--acquisition {
+        background: rgba(234, 179, 8, 0.1);
+        color: #ca8a04;
+    }
+
+    :global([data-theme="dark"]) .badge--acquisition {
+        background: rgba(234, 179, 8, 0.15);
+        color: #fbbf24;
+    }
+
+    .badge--platform {
+        background: var(--accent-subtle);
+        color: var(--text-secondary);
+    }
+
+    .hero-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    /* How it works */
+    .how-it-works {
+        margin-bottom: 4rem;
+    }
+
+    .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+
+    .step {
+        text-align: center;
+        padding: 1.5rem;
+    }
+
+    .step-number {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        background: var(--accent);
+        color: var(--bg-color);
+        border-radius: 50%;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .step h3 {
+        font-size: 1.125rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .step p {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+    }
+
+    /* Benefits */
+    .benefits-section {
+        margin-bottom: 4rem;
+    }
+
+    .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+
+    .benefit-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        padding: 1.5rem;
+        text-align: center;
+    }
+
+    .benefit-icon {
+        font-size: 2rem;
+        display: block;
+        margin-bottom: 1rem;
+    }
+
+    .benefit-card h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .benefit-card p {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+    }
+
+    /* Features */
+    .features-section {
+        margin-bottom: 4rem;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .feature-item {
+        padding: 0.5rem 0;
+    }
+
+    .feature-icon {
+        font-size: 1.5rem;
+        display: block;
+        margin-bottom: 0.75rem;
+    }
+
+    .feature-title {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.375rem;
+    }
+
+    .feature-description {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+    }
+
+    /* Pricing */
+    .pricing-section {
+        margin-bottom: 4rem;
+    }
+
+    .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .pricing-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        padding: 2rem;
+        position: relative;
+    }
+
+    .pricing-card--popular {
+        border-color: var(--accent);
+    }
+
+    .popular-badge {
+        position: absolute;
+        top: -0.75rem;
+        right: 1rem;
+        background: var(--accent);
+        color: var(--bg-color);
+        font-size: 0.6875rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        padding: 0.25rem 0.5rem;
+        border-radius: var(--radius-sm);
+    }
+
+    .pricing-card h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .pricing-price {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .pricing-price span {
+        font-size: 1rem;
+        font-weight: 400;
+        color: var(--text-secondary);
+    }
+
+    .pricing-description {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+    }
+
+    /* Acquisition */
+    .acquisition-section {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-xl);
+        padding: 2.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .acquisition-content {
+        max-width: 600px;
+    }
+
+    .acquisition-icon {
+        font-size: 2rem;
+        display: block;
+        margin-bottom: 1rem;
+    }
+
+    .acquisition-content h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .acquisition-content p {
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+
+    .community-stat {
+        font-weight: 500;
+        color: var(--text-primary) !important;
+    }
+
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 2rem;
+        }
+
+        .tagline {
+            font-size: 1rem;
+        }
+
+        .steps-grid,
+        .benefits-grid,
+        .features-grid,
+        .pricing-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .acquisition-section {
+            padding: 1.5rem;
+        }
+    }
+</style>
