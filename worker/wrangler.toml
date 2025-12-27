@@ -9,10 +9,8 @@ account_id = "4963e2d7410e0650e45f31d098a84880"
 [vars]
 ADMIN_EMAIL = "hello@simplebytes.com"
 FROM_EMAIL = "noreply@simplebytes.com"
-# Add your MailLayer template IDs here:
-CONFIRMATION_TEMPLATE_ID = ""
-ADMIN_TEMPLATE_ID = ""
+CONFIRMATION_TEMPLATE_ID = "txn_694fabb3055c3457fb7a84bd_mjo4ctu0"
+ADMIN_TEMPLATE_ID = "txn_694faf26055c3457fb7a84dc_mjo4vraw"
 
 # Secrets (add via `wrangler secret put`):
 # - TURNSTILE_SECRET_KEY
-# - MAILLAYER_API_KEY

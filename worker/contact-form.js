@@ -8,11 +8,9 @@
  *
  * Environment variables required:
  * - TURNSTILE_SECRET_KEY: Cloudflare Turnstile secret key
- * - MAILLAYER_API_KEY: MailLayer API key
  * - CONFIRMATION_TEMPLATE_ID: MailLayer template ID for user confirmation
  * - ADMIN_TEMPLATE_ID: MailLayer template ID for admin notification
  * - ADMIN_EMAIL: Email to receive submissions (default: hello@simplebytes.com)
- * - FROM_EMAIL: Email to send from (e.g., noreply@simplebytes.com)
  *
  * Template variables available:
  * - [name]: Sender's name
@@ -155,17 +153,15 @@ async function verifyTurnstile(token, secretKey) {
 }
 
 async function sendEmail(env, { to, replyTo, templateId, variables }) {
-	const response = await fetch('https://api.maillayer.com/v1/send', {
+	const response = await fetch('https://mail.simplebytes.com/api/transactional/send', {
 		method: 'POST',
 		headers: {
-			'Authorization': `Bearer ${env.MAILLAYER_API_KEY}`,
 			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify({
-			from: env.FROM_EMAIL || 'noreply@simplebytes.com',
+			apiKey: templateId,
 			to,
-			reply_to: replyTo,
-			template_id: templateId,
+			replyTo,
 			variables,
 		}),
 	});
