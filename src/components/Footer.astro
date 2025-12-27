@@ -2,7 +2,13 @@
 ---
 
 <footer class="footer">
-    <span>© 2025 <a href="https://simplebytes.com">Simple Bytes</a>, a <a href="https://meome.com/?ref=simplebytes" target="_blank" rel="noopener">Meome</a> company</span>
+    <div class="footer-content">
+        <span>© 2025 <a href="https://simplebytes.com">Simple Bytes</a>, a <a href="https://meome.com/?ref=simplebytes" target="_blank" rel="noopener">Meome</a> company</span>
+        <nav class="footer-links">
+            <a href="/privacy">Privacy</a>
+            <a href="/terms">Terms</a>
+        </nav>
+    </div>
 </footer>
 
 <style>
@@ -25,6 +31,23 @@
 
     .footer a:hover {
         color: var(--text-primary);
+    }
+
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .footer-links {
+        display: flex;
+        gap: 1.5rem;
+    }
+
+    .footer-links a {
+        font-size: 0.8125rem;
     }
 
     @media (max-width: 768px) {
