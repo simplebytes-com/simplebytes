@@ -1,0 +1,398 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const projects = [
+    { value: 'general', label: 'General Inquiry' },
+    { value: 'domain-details', label: 'Domain Details' },
+    { value: 'doodlify', label: 'Doodlify' },
+    { value: 'easychef', label: 'EasyChef.ai' },
+    { value: 'og-image-preview', label: 'OG Image Preview' },
+    { value: 'ig-grid-planner', label: 'IG Grid Planner' },
+    { value: 'launchpage', label: 'Launchpage.xyz' },
+];
+
+const topics = [
+    { value: 'support', label: 'Support' },
+    { value: 'information', label: 'Information' },
+    { value: 'gdpr', label: 'GDPR Request' },
+    { value: 'partnership', label: 'Partnership' },
+    { value: 'bug', label: 'Bug Report' },
+    { value: 'other', label: 'Other' },
+];
+---
+
+<BaseLayout
+    title="Contact - Simple Bytes"
+    description="Get in touch with Simple Bytes. We're here to help with support, information, GDPR requests, and more."
+>
+    <a href="/" class="back-link">← Back to home</a>
+
+    <div class="contact-page">
+        <section class="hero">
+            <h1>Contact Us</h1>
+            <p class="tagline">Have a question or need help? We'd love to hear from you.</p>
+        </section>
+
+        <form id="contact-form" class="contact-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required autocomplete="name" />
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required autocomplete="email" />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="project">Project</label>
+                    <select id="project" name="project" required>
+                        {projects.map((p) => (
+                            <option value={p.value}>{p.label}</option>
+                        ))}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="topic">Topic</label>
+                    <select id="topic" name="topic" required>
+                        {topics.map((t) => (
+                            <option value={t.value}>{t.label}</option>
+                        ))}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+
+            <!-- Honeypot field - hidden from users -->
+            <div class="hp-field" aria-hidden="true">
+                <label for="website">Website</label>
+                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <!-- Cloudflare Turnstile -->
+            <div class="cf-turnstile" data-sitekey="YOUR_TURNSTILE_SITE_KEY" data-theme="auto"></div>
+
+            <button type="submit" class="btn btn--primary submit-btn">
+                <span class="btn-text">Send Message</span>
+                <span class="btn-loading" style="display: none;">Sending...</span>
+            </button>
+        </form>
+
+        <div id="form-success" class="form-message form-message--success" style="display: none;">
+            <span class="message-icon">✓</span>
+            <h2>Message Sent!</h2>
+            <p>Thank you for reaching out. We'll get back to you as soon as possible.</p>
+            <button type="button" class="btn btn--secondary" onclick="resetForm()">Send Another Message</button>
+        </div>
+
+        <div id="form-error" class="form-message form-message--error" style="display: none;">
+            <span class="message-icon">!</span>
+            <h2>Something went wrong</h2>
+            <p id="error-text">Please try again later or email us directly at hello@simplebytes.com</p>
+            <button type="button" class="btn btn--secondary" onclick="hideError()">Try Again</button>
+        </div>
+    </div>
+</BaseLayout>
+
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+<script is:inline>
+    const WORKER_URL = 'https://contact.simplebytes.com'; // Update with your worker URL
+
+    const form = document.getElementById('contact-form');
+    const successMessage = document.getElementById('form-success');
+    const errorMessage = document.getElementById('form-error');
+    const submitBtn = form.querySelector('.submit-btn');
+    const btnText = submitBtn.querySelector('.btn-text');
+    const btnLoading = submitBtn.querySelector('.btn-loading');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Show loading state
+        btnText.style.display = 'none';
+        btnLoading.style.display = 'inline';
+        submitBtn.disabled = true;
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        // Get Turnstile token
+        const turnstileResponse = formData.get('cf-turnstile-response');
+        if (!turnstileResponse) {
+            showError('Please complete the security check.');
+            return;
+        }
+
+        try {
+            const response = await fetch(WORKER_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: data.name,
+                    email: data.email,
+                    project: data.project,
+                    topic: data.topic,
+                    message: data.message,
+                    website: data.website, // honeypot
+                    turnstileToken: turnstileResponse,
+                }),
+            });
+
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+                form.style.display = 'none';
+                successMessage.style.display = 'block';
+            } else {
+                showError(result.message || 'Failed to send message. Please try again.');
+            }
+        } catch (error) {
+            showError('Network error. Please check your connection and try again.');
+        }
+    });
+
+    function showError(message) {
+        document.getElementById('error-text').textContent = message;
+        errorMessage.style.display = 'block';
+        resetButton();
+    }
+
+    function hideError() {
+        errorMessage.style.display = 'none';
+        // Reset Turnstile
+        if (window.turnstile) {
+            turnstile.reset();
+        }
+    }
+
+    function resetButton() {
+        const submitBtn = form.querySelector('.submit-btn');
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnLoading = submitBtn.querySelector('.btn-loading');
+        btnText.style.display = 'inline';
+        btnLoading.style.display = 'none';
+        submitBtn.disabled = false;
+    }
+
+    function resetForm() {
+        form.reset();
+        form.style.display = 'block';
+        successMessage.style.display = 'none';
+        errorMessage.style.display = 'none';
+        resetButton();
+        // Reset Turnstile
+        if (window.turnstile) {
+            turnstile.reset();
+        }
+    }
+
+    // Make resetForm available globally
+    window.resetForm = resetForm;
+    window.hideError = hideError;
+</script>
+
+<style>
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        margin-bottom: 2rem;
+        transition: color 0.2s;
+    }
+
+    .back-link:hover {
+        color: var(--text-primary);
+    }
+
+    .contact-page {
+        max-width: 600px;
+    }
+
+    .hero {
+        margin-bottom: 2.5rem;
+    }
+
+    h1 {
+        font-size: clamp(2rem, 5vw, 2.75rem);
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        margin-bottom: 0.5rem;
+    }
+
+    .tagline {
+        color: var(--text-secondary);
+        font-size: 1.125rem;
+        line-height: 1.6;
+    }
+
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    label {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-primary);
+    }
+
+    input,
+    select,
+    textarea {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        font-family: inherit;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-md);
+        color: var(--text-primary);
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+    }
+
+    :global([data-theme="dark"]) input:focus,
+    :global([data-theme="dark"]) select:focus,
+    :global([data-theme="dark"]) textarea:focus {
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
+    }
+
+    select {
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23525252' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        padding-right: 2.5rem;
+    }
+
+    :global([data-theme="dark"]) select {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23A3A3A3' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
+
+    /* Honeypot - hidden from users */
+    .hp-field {
+        position: absolute;
+        left: -9999px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+    }
+
+    .cf-turnstile {
+        margin-top: 0.5rem;
+    }
+
+    .submit-btn {
+        margin-top: 0.5rem;
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .submit-btn:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+
+    /* Success/Error Messages */
+    .form-message {
+        text-align: center;
+        padding: 2.5rem;
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border-color);
+        background: var(--card-bg);
+    }
+
+    .message-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .form-message--success .message-icon {
+        background: rgba(34, 197, 94, 0.1);
+        color: #16a34a;
+    }
+
+    :global([data-theme="dark"]) .form-message--success .message-icon {
+        background: rgba(34, 197, 94, 0.15);
+        color: #4ade80;
+    }
+
+    .form-message--error .message-icon {
+        background: rgba(239, 68, 68, 0.1);
+        color: #dc2626;
+    }
+
+    :global([data-theme="dark"]) .form-message--error .message-icon {
+        background: rgba(239, 68, 68, 0.15);
+        color: #f87171;
+    }
+
+    .form-message h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-message p {
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 1.75rem;
+        }
+
+        .form-row {
+            grid-template-columns: 1fr;
+        }
+
+        .tagline {
+            font-size: 1rem;
+        }
+    }
+</style>
