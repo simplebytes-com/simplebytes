@@ -1,6 +1,7 @@
 name = "simplebytes-contact"
 main = "contact-form.js"
 compatibility_date = "2024-01-01"
+account_id = "4963e2d7410e0650e45f31d098a84880"
 
 # Custom domain - configure in Cloudflare dashboard
 # routes = [{ pattern = "contact.simplebytes.com", custom_domain = true }]
@@ -8,6 +9,9 @@ compatibility_date = "2024-01-01"
 [vars]
 ADMIN_EMAIL = "hello@simplebytes.com"
 FROM_EMAIL = "noreply@simplebytes.com"
+# Add your MailLayer template IDs here:
+CONFIRMATION_TEMPLATE_ID = ""
+ADMIN_TEMPLATE_ID = ""
 
 # Secrets (add via `wrangler secret put`):
 # - TURNSTILE_SECRET_KEY
