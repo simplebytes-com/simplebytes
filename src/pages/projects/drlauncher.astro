@@ -1,0 +1,252 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const features = [
+    { icon: '📚', title: '30+ Verified Directories', description: 'Curated list of premium directories that actually pass indexable backlinks.' },
+    { icon: '💰', title: 'Organized by DR & Price', description: 'Directories sorted by Domain Rating, cost, and niche category.' },
+    { icon: '⚡', title: 'Zero-Effort Strategy', description: 'Just pay, submit your URL, and receive one-way backlinks. No outreach needed.' },
+    { icon: '🎯', title: 'Niche Categories', description: 'Find directories for startups, SaaS, tech tools, business, and more.' },
+    { icon: '📈', title: 'Tested Results', description: 'Verified across multiple projects and domains.' },
+    { icon: '🔄', title: 'Monthly Updates', description: 'Database continuously maintained with new directories added regularly.' }
+];
+
+---
+
+<BaseLayout
+    title="DR Launcher - Simple Bytes"
+    description="A paid guide to 30+ paid directories that help you launch your Domain Rating from 0 to 20 in weeks."
+>
+    <a href="/" class="back-link">← Back to all projects</a>
+
+    <section class="hero">
+        <h1>DR Launcher</h1>
+        <p class="tagline">A paid guide to 30+ paid directories that help you go from DR 0 to 20 in weeks.</p>
+        <div class="hero-badges">
+            <span class="badge badge--paid">Paid</span>
+            <span class="badge badge--guarantee">Money-Back Guarantee</span>
+        </div>
+        <div class="hero-links">
+            <a href="https://www.drlauncher.com?ref=simplebytes" target="_blank" rel="noopener" class="btn btn--primary">
+                Get DR Launcher →
+            </a>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <h2 class="section-title">Features</h2>
+        <div class="features-grid">
+            {features.map((feature) => (
+                <div class="feature-item">
+                    <span class="feature-icon">{feature.icon}</span>
+                    <h3 class="feature-title">{feature.title}</h3>
+                    <p class="feature-description">{feature.description}</p>
+                </div>
+            ))}
+        </div>
+    </section>
+
+    <section class="how-section">
+        <h2 class="section-title">How It Works</h2>
+        <div class="how-content">
+            <p>DR Launcher is a paid guide containing 30+ paid directories that accept submissions for a fee. Each directory has been tested to pass real, indexable backlinks.</p>
+            <p>Browse the list, pick directories that match your niche and budget, pay for your listings, and build your domain authority.</p>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-content">
+            <span class="cta-icon">🚀</span>
+            <h2>Ready to Boost Your DR?</h2>
+            <p>Get lifetime access to our curated directory database. If you don't reach DR 20 after submitting to all directories, get a full refund.</p>
+            <div class="cta-links">
+                <a href="https://www.drlauncher.com?ref=simplebytes" target="_blank" rel="noopener" class="btn btn--primary">
+                    Get Started →
+                </a>
+            </div>
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        margin-bottom: 2rem;
+        transition: color 0.2s;
+    }
+
+    .back-link:hover {
+        color: var(--text-primary);
+    }
+
+    .hero {
+        margin-bottom: 4rem;
+    }
+
+    h1 {
+        font-size: clamp(2.5rem, 6vw, 3.5rem);
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        margin-bottom: 1rem;
+    }
+
+    .tagline {
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        max-width: 600px;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-badges {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .badge {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 0.375rem 0.75rem;
+        border-radius: var(--radius-sm);
+    }
+
+    .badge--paid {
+        background: rgba(59, 130, 246, 0.1);
+        color: #2563eb;
+    }
+
+    :global([data-theme="dark"]) .badge--paid {
+        background: rgba(59, 130, 246, 0.15);
+        color: #60a5fa;
+    }
+
+    .badge--guarantee {
+        background: rgba(34, 197, 94, 0.1);
+        color: #16a34a;
+    }
+
+    :global([data-theme="dark"]) .badge--guarantee {
+        background: rgba(34, 197, 94, 0.15);
+        color: #4ade80;
+    }
+
+    .hero-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    /* Features */
+    .features-section {
+        margin-bottom: 4rem;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+
+    .feature-item {
+        padding: 0.5rem 0;
+    }
+
+    .feature-icon {
+        font-size: 1.5rem;
+        display: block;
+        margin-bottom: 0.75rem;
+    }
+
+    .feature-title {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.375rem;
+    }
+
+    .feature-description {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+    }
+
+    /* How section */
+    .how-section {
+        margin-bottom: 4rem;
+    }
+
+    .how-content {
+        max-width: 600px;
+    }
+
+    .how-content p {
+        color: var(--text-secondary);
+        line-height: 1.7;
+        margin-bottom: 1rem;
+    }
+
+    .how-content p:last-child {
+        margin-bottom: 0;
+    }
+
+    /* CTA section */
+    .cta-section {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-xl);
+        padding: 2.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .cta-content {
+        max-width: 600px;
+    }
+
+    .cta-icon {
+        font-size: 2rem;
+        display: block;
+        margin-bottom: 1rem;
+    }
+
+    .cta-content h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .cta-content p {
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+
+    .cta-links {
+        margin-top: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 2rem;
+        }
+
+        .tagline {
+            font-size: 1rem;
+        }
+
+        .features-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .cta-section {
+            padding: 1.5rem;
+        }
+    }
+</style>
