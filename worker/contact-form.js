@@ -32,7 +32,7 @@ const PROJECT_LABELS = {
 	'doodlify': 'Doodlify',
 	'easychef': 'EasyChef.ai',
 	'og-image-preview': 'OG Image Preview',
-	'ig-grid-planner': 'IG Grid Planner',
+	'iconbuddy': 'IconBuddy',
 	'launchpage': 'Launchpage.xyz',
 };
 

@@ -1,0 +1,195 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const features = [
+    { icon: '🔍', title: '500K+ Icons', description: 'Search across 500,000+ open-source icons from 300+ curated icon sets.' },
+    { icon: '🎨', title: 'Edit & Customize', description: 'Change colors, size, and style directly before downloading.' },
+    { icon: '📦', title: 'Multiple Formats', description: 'Export icons as SVG, PNG, JSX, Vue, and more.' },
+    { icon: '🔌', title: 'Integrations', description: 'Plugins for Figma, VS Code, Framer, WordPress, and Chrome.' }
+];
+
+const stats = [
+    { value: '500K+', label: 'Icons' },
+    { value: '300+', label: 'Icon Sets' },
+    { value: '500K+', label: 'Users' }
+];
+---
+
+<BaseLayout
+    title="IconBuddy - Simple Bytes"
+    description="Search engine for 500K+ open-source icons across 300+ icon sets with editing tools and design integrations."
+>
+    <a href="/" class="back-link">← Back to all projects</a>
+
+    <section class="hero">
+        <h1>IconBuddy</h1>
+        <p class="tagline">The ultimate search engine for open-source icons. Find, customize, and download from 500,000+ icons across 300+ icon sets — all in one place. Acquired by Simple Bytes in March 2026 as a strategic investment.</p>
+        <div class="stats-row">
+            {stats.map((stat) => (
+                <div class="stat">
+                    <span class="stat-value">{stat.value}</span>
+                    <span class="stat-label">{stat.label}</span>
+                </div>
+            ))}
+        </div>
+        <div class="hero-links">
+            <a href="https://www.iconbuddy.com?ref=simplebytes" target="_blank" rel="noopener" class="btn btn--primary">
+                Browse Icons →
+            </a>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <h2 class="section-title">Why IconBuddy</h2>
+        <div class="features-grid">
+            {features.map((feature) => (
+                <div class="feature-item">
+                    <span class="feature-icon">{feature.icon}</span>
+                    <h3 class="feature-title">{feature.title}</h3>
+                    <p class="feature-description">{feature.description}</p>
+                </div>
+            ))}
+        </div>
+    </section>
+
+    <section class="icon-sets-section">
+        <h2 class="section-title">Popular Icon Sets</h2>
+        <div class="tags-grid">
+            <span class="icon-set-tag">Fluent UI (18,500+)</span>
+            <span class="icon-set-tag">Material Symbols (14,900+)</span>
+            <span class="icon-set-tag">Google Material (11,000+)</span>
+            <span class="icon-set-tag">Phosphor (9,000+)</span>
+            <span class="icon-set-tag">Solar (7,400+)</span>
+            <span class="icon-set-tag">And 290+ more</span>
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        margin-bottom: 2rem;
+        transition: color 0.2s;
+    }
+
+    .back-link:hover {
+        color: var(--text-primary);
+    }
+
+    .hero {
+        margin-bottom: 4rem;
+    }
+
+    h1 {
+        font-size: clamp(2.5rem, 6vw, 3.5rem);
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        margin-bottom: 1rem;
+    }
+
+    .tagline {
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        max-width: 600px;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+    }
+
+    .stats-row {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .stat {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .stat-value {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+
+    .stat-label {
+        font-size: 0.8125rem;
+        color: var(--text-tertiary);
+    }
+
+    .hero-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .features-section {
+        margin-bottom: 4rem;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .feature-item {
+        padding: 0.5rem 0;
+    }
+
+    .feature-icon {
+        font-size: 1.5rem;
+        display: block;
+        margin-bottom: 0.75rem;
+    }
+
+    .feature-title {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.375rem;
+    }
+
+    .feature-description {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+    }
+
+    .icon-sets-section {
+        margin-bottom: 2rem;
+    }
+
+    .tags-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .icon-set-tag {
+        padding: 0.5rem 1rem;
+        background: var(--accent-subtle);
+        border-radius: var(--radius-md);
+        font-size: 0.875rem;
+        color: var(--text-primary);
+    }
+
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 2rem;
+        }
+
+        .tagline {
+            font-size: 1rem;
+        }
+
+        .features-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
