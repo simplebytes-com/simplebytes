@@ -5,7 +5,10 @@
     <a href="/" class="logo-link" aria-label="Simple Bytes Home">
         <img src="/svg/logo.svg" alt="Simple Bytes" class="logo">
     </a>
-    <button class="theme-toggle" role="switch" aria-checked="false" aria-label="Toggle dark mode"></button>
+    <div class="header-right">
+        <a href="/blog" class="header-link">Blog</a>
+        <button class="theme-toggle" role="switch" aria-checked="false" aria-label="Toggle dark mode"></button>
+    </div>
 </header>
 
 <style>
@@ -29,6 +32,23 @@
 
     :global([data-theme="dark"]) .logo {
         filter: invert(1);
+    }
+
+    .header-right {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .header-link {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .header-link:hover {
+        color: var(--text-primary);
     }
 
     .theme-toggle {
