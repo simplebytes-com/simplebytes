@@ -1,0 +1,191 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const features = [
+    { icon: '📋', title: 'Simple Lists', description: 'Create clean, shareable recommendation lists on any topic.' },
+    { icon: '🔗', title: 'Easy Sharing', description: 'Share your lists with a simple link anyone can access.' },
+    { icon: '💡', title: 'Any Topic', description: 'Books, tools, restaurants, podcasts - recommend anything you love.' },
+    { icon: '🎨', title: 'Clean Design', description: 'Beautiful, distraction-free presentation for your recommendations.' }
+];
+---
+
+<BaseLayout
+    title="recommended.by - Simple Bytes"
+    description="Easily share the things you love as simple recommendation lists."
+>
+    <a href="/" class="back-link">&larr; Back to all projects</a>
+
+    <section class="hero">
+        <h1>recommended.by</h1>
+        <p class="tagline">Easily share the things you love as simple recommendation lists. Create and share curated lists of your favorite things with anyone.</p>
+        <div class="hero-links">
+            <a href="https://recommended.by/?ref=simplebytes" target="_blank" rel="noopener" class="btn btn--primary">
+                Visit recommended.by &rarr;
+            </a>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <h2 class="section-title">How It Works</h2>
+        <div class="steps-grid">
+            <div class="step">
+                <span class="step-number">1</span>
+                <h3>Create a List</h3>
+                <p>Pick a topic and add your recommendations</p>
+            </div>
+            <div class="step">
+                <span class="step-number">2</span>
+                <h3>Curate</h3>
+                <p>Add descriptions and organize your picks</p>
+            </div>
+            <div class="step">
+                <span class="step-number">3</span>
+                <h3>Share</h3>
+                <p>Send your list to friends or post it anywhere</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <h2 class="section-title">Features</h2>
+        <div class="features-grid">
+            {features.map((feature) => (
+                <div class="feature-item">
+                    <span class="feature-icon">{feature.icon}</span>
+                    <h3 class="feature-title">{feature.title}</h3>
+                    <p class="feature-description">{feature.description}</p>
+                </div>
+            ))}
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        margin-bottom: 2rem;
+        transition: color 0.2s;
+    }
+
+    .back-link:hover {
+        color: var(--text-primary);
+    }
+
+    .hero {
+        margin-bottom: 4rem;
+    }
+
+    h1 {
+        font-size: clamp(2.5rem, 6vw, 3.5rem);
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        margin-bottom: 1rem;
+    }
+
+    .tagline {
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        max-width: 600px;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    /* How it works */
+    .how-it-works {
+        margin-bottom: 4rem;
+    }
+
+    .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+
+    .step {
+        text-align: center;
+        padding: 1.5rem;
+    }
+
+    .step-number {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        background: var(--accent);
+        color: var(--bg-color);
+        border-radius: 50%;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .step h3 {
+        font-size: 1.125rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .step p {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+    }
+
+    /* Features */
+    .features-section {
+        margin-bottom: 4rem;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .feature-item {
+        padding: 0.5rem 0;
+    }
+
+    .feature-icon {
+        font-size: 1.5rem;
+        display: block;
+        margin-bottom: 0.75rem;
+    }
+
+    .feature-title {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.375rem;
+    }
+
+    .feature-description {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 2rem;
+        }
+
+        .tagline {
+            font-size: 1rem;
+        }
+
+        .steps-grid,
+        .features-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
