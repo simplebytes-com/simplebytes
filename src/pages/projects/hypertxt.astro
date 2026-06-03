@@ -1,0 +1,366 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const features = [
+    { icon: '🧠', title: 'Brand Knowledge', description: 'Learns from your brand text, website URLs, and sitemaps to keep every draft on-voice.' },
+    { icon: '🔑', title: 'Provider-Backed Keywords', description: 'Real keyword metrics from DataForSEO and Keywords Everywhere — never fabricated.' },
+    { icon: '✍️', title: 'Multi-Pass Drafts', description: 'Outline, draft, and review passes produce human-quality, publish-ready articles.' },
+    { icon: '🚀', title: 'Export & Publish', description: 'Markdown export plus WordPress, Ghost, and webhook publishing integrations.' }
+];
+
+const pricing = [
+    { name: 'Starter', price: '$19', period: '/month', description: '10 articles, 200 keyword credits, 3 projects.', popular: false },
+    { name: 'Growth', price: '$49', period: '/month', description: '30 articles, 600 keyword credits, 9 projects.', popular: true },
+    { name: 'Agency', price: '$149', period: '/month', description: '300 articles, 6,000 keyword credits, unlimited projects.', popular: false },
+    { name: 'BYOK', price: '$89', period: '/month', description: 'Unlimited articles with your own provider API keys.', popular: false }
+];
+---
+
+<BaseLayout
+    title="HyperTxt.ai - Simple Bytes"
+    description="The AI brand visibility engine that turns brand knowledge and keywords into publish-ready, brand-aware SEO content."
+>
+    <a href="/" class="back-link">← Back to all projects</a>
+
+    <section class="hero">
+        <h1>HyperTxt.ai</h1>
+        <p class="tagline">Create brand-aware content for search workflows. HyperTxt turns brand knowledge, keywords, and research sources into publish-ready SEO drafts for the channels you already use.</p>
+        <div class="hero-badges">
+            <span class="badge badge--acquisition">Acquired & Relaunched</span>
+            <span class="badge badge--platform">Web App</span>
+        </div>
+        <div class="hero-links">
+            <a href="https://www.hypertxt.ai?ref=simplebytes" target="_blank" rel="noopener" class="btn btn--primary">
+                Visit HyperTxt →
+            </a>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <h2 class="section-title">How It Works</h2>
+        <div class="steps-grid">
+            <div class="step">
+                <span class="step-number">1</span>
+                <h3>Add Brand Knowledge</h3>
+                <p>Feed in brand text, website URLs, and sitemaps</p>
+            </div>
+            <div class="step">
+                <span class="step-number">2</span>
+                <h3>Research Keywords</h3>
+                <p>Expand seeds into provider-backed keyword ideas</p>
+            </div>
+            <div class="step">
+                <span class="step-number">3</span>
+                <h3>Generate & Publish</h3>
+                <p>Multi-pass drafts you can export or publish directly</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <h2 class="section-title">Built for Visibility, End to End</h2>
+        <div class="features-grid">
+            {features.map((feature) => (
+                <div class="feature-item">
+                    <span class="feature-icon">{feature.icon}</span>
+                    <h3 class="feature-title">{feature.title}</h3>
+                    <p class="feature-description">{feature.description}</p>
+                </div>
+            ))}
+        </div>
+    </section>
+
+    <section class="pricing-section">
+        <h2 class="section-title">Simple Pricing</h2>
+        <p class="section-description">Every feature on every plan. Pick the volume that matches your growth — no feature gating.</p>
+        <div class="pricing-grid">
+            {pricing.map((tier) => (
+                <div class={`pricing-card${tier.popular ? ' pricing-card--popular' : ''}`}>
+                    {tier.popular && <span class="popular-badge">Most Popular</span>}
+                    <h3>{tier.name}</h3>
+                    <p class="pricing-price">{tier.price}<span>{tier.period}</span></p>
+                    <p class="pricing-description">{tier.description}</p>
+                </div>
+            ))}
+        </div>
+    </section>
+
+    <section class="acquisition-section">
+        <div class="acquisition-content">
+            <span class="acquisition-icon">🎉</span>
+            <h2>Acquired, Rebuilt, Relaunched</h2>
+            <p>HyperTxt.ai joined the Simple Bytes portfolio and was rebuilt from the ground up — a new full-stack foundation with brand-aware generation, provider-backed keyword metrics, and multi-pass article workflows.</p>
+            <p class="community-stat">HyperTxt relaunched on June 1, 2026.</p>
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        margin-bottom: 2rem;
+        transition: color 0.2s;
+    }
+
+    .back-link:hover {
+        color: var(--text-primary);
+    }
+
+    .hero {
+        margin-bottom: 4rem;
+    }
+
+    h1 {
+        font-size: clamp(2.5rem, 6vw, 3.5rem);
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        margin-bottom: 1rem;
+    }
+
+    .tagline {
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        max-width: 600px;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-badges {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .badge {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 0.375rem 0.75rem;
+        border-radius: var(--radius-sm);
+    }
+
+    .badge--acquisition {
+        background: rgba(234, 179, 8, 0.1);
+        color: #ca8a04;
+    }
+
+    :global([data-theme="dark"]) .badge--acquisition {
+        background: rgba(234, 179, 8, 0.15);
+        color: #fbbf24;
+    }
+
+    .badge--platform {
+        background: var(--accent-subtle);
+        color: var(--text-secondary);
+    }
+
+    .hero-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    /* How it works */
+    .how-it-works {
+        margin-bottom: 4rem;
+    }
+
+    .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+
+    .step {
+        text-align: center;
+        padding: 1.5rem;
+    }
+
+    .step-number {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        background: var(--accent);
+        color: var(--bg-color);
+        border-radius: 50%;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .step h3 {
+        font-size: 1.125rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .step p {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+    }
+
+    /* Features */
+    .features-section {
+        margin-bottom: 4rem;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .feature-item {
+        padding: 0.5rem 0;
+    }
+
+    .feature-icon {
+        font-size: 1.5rem;
+        display: block;
+        margin-bottom: 0.75rem;
+    }
+
+    .feature-title {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.375rem;
+    }
+
+    .feature-description {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+    }
+
+    /* Pricing */
+    .pricing-section {
+        margin-bottom: 4rem;
+    }
+
+    .section-description {
+        font-size: 0.9375rem;
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+        max-width: 600px;
+    }
+
+    .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .pricing-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        padding: 2rem;
+        position: relative;
+    }
+
+    .pricing-card--popular {
+        border-color: var(--accent);
+    }
+
+    .popular-badge {
+        position: absolute;
+        top: -0.75rem;
+        right: 1rem;
+        background: var(--accent);
+        color: var(--bg-color);
+        font-size: 0.6875rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        padding: 0.25rem 0.5rem;
+        border-radius: var(--radius-sm);
+    }
+
+    .pricing-card h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .pricing-price {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .pricing-price span {
+        font-size: 1rem;
+        font-weight: 400;
+        color: var(--text-secondary);
+    }
+
+    .pricing-description {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+    }
+
+    /* Acquisition */
+    .acquisition-section {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-xl);
+        padding: 2.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .acquisition-content {
+        max-width: 600px;
+    }
+
+    .acquisition-icon {
+        font-size: 2rem;
+        display: block;
+        margin-bottom: 1rem;
+    }
+
+    .acquisition-content h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .acquisition-content p {
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+
+    .community-stat {
+        font-weight: 500;
+        color: var(--text-primary) !important;
+    }
+
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 2rem;
+        }
+
+        .tagline {
+            font-size: 1rem;
+        }
+
+        .steps-grid,
+        .features-grid,
+        .pricing-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .acquisition-section {
+            padding: 1.5rem;
+        }
+    }
+</style>

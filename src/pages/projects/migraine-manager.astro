@@ -1,0 +1,370 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const features = [
+    { icon: '⚡', title: 'One-Tap Attack Mode', description: 'Start a log the instant symptoms hit, then fill in the details when they ease.' },
+    { icon: '🌙', title: 'Low-Light Screens', description: 'Calm, soft-contrast screens designed for logging comfortably mid-attack.' },
+    { icon: '💊', title: 'Medication Tracking', description: 'Log doses, timing, and relief while keeping an eye on your medication days.' },
+    { icon: '📄', title: 'Clinician-Ready Exports', description: 'Turn months of logs into a clear summary to bring to your neurologist (Pro).' }
+];
+
+const benefits = [
+    { icon: '🔒', title: 'Private by Default', description: 'Use it fully on-device. Optional sync backs up across devices for Pro users.' },
+    { icon: '📈', title: 'Trends & Correlations', description: 'See frequency, duration, and severity over time and surface repeating patterns.' },
+    { icon: '📲', title: 'Home & Lock Screen Widgets', description: 'Start a log or check your week without even opening the app.' }
+];
+
+const pricing = [
+    { name: 'Weekly', price: '$2.99', period: '/week', description: 'Short-term Pro access for sync, analysis, widgets, and exports.', popular: false },
+    { name: 'Yearly', price: '$29.99', period: '/year', description: 'Best default for ongoing tracking. Includes a 7-day free trial.', popular: true },
+    { name: 'Lifetime', price: '$99.99', period: 'once', description: 'One-time purchase for lifetime Pro access.', popular: false }
+];
+---
+
+<BaseLayout
+    title="Migraine Manager - Simple Bytes"
+    description="A fast, calm, private migraine tracker — log attacks in one tap, then build a clinician-ready history."
+>
+    <a href="/" class="back-link">← Back to all projects</a>
+
+    <section class="hero">
+        <h1>Migraine Manager</h1>
+        <p class="tagline">A fast, calm, private migraine tracker built for the moment symptoms start. Log attacks in one tap, add the details later, and build an organized, clinician-ready history when you feel ready to review.</p>
+        <div class="hero-badges">
+            <span class="badge badge--platform">iOS</span>
+            <span class="badge badge--platform">Private by Default</span>
+        </div>
+        <div class="hero-links">
+            <a href="https://migrainemanager.com?ref=simplebytes" target="_blank" rel="noopener" class="btn btn--primary">
+                Get Migraine Manager →
+            </a>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <h2 class="section-title">How It Works</h2>
+        <div class="steps-grid">
+            <div class="step">
+                <span class="step-number">1</span>
+                <h3>Tap to Log</h3>
+                <p>Open Attack Mode and start the timer — no typing needed</p>
+            </div>
+            <div class="step">
+                <span class="step-number">2</span>
+                <h3>Add Details Later</h3>
+                <p>When symptoms ease, add severity, medication, and triggers</p>
+            </div>
+            <div class="step">
+                <span class="step-number">3</span>
+                <h3>Review Patterns</h3>
+                <p>Watch trends build and bring a clear summary to your doctor</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits-section">
+        <h2 class="section-title">Why Migraine Manager?</h2>
+        <div class="benefits-grid">
+            {benefits.map((benefit) => (
+                <div class="benefit-card">
+                    <span class="benefit-icon">{benefit.icon}</span>
+                    <h3>{benefit.title}</h3>
+                    <p>{benefit.description}</p>
+                </div>
+            ))}
+        </div>
+    </section>
+
+    <section class="features-section">
+        <h2 class="section-title">Features</h2>
+        <div class="features-grid">
+            {features.map((feature) => (
+                <div class="feature-item">
+                    <span class="feature-icon">{feature.icon}</span>
+                    <h3 class="feature-title">{feature.title}</h3>
+                    <p class="feature-description">{feature.description}</p>
+                </div>
+            ))}
+        </div>
+    </section>
+
+    <section class="pricing-section">
+        <h2 class="section-title">Simple Pricing</h2>
+        <p class="section-description">Start free with core tracking, water logging, and local history. Upgrade to Pro for sync, analysis, exports, and widgets.</p>
+        <div class="pricing-grid">
+            {pricing.map((tier) => (
+                <div class={`pricing-card${tier.popular ? ' pricing-card--popular' : ''}`}>
+                    {tier.popular && <span class="popular-badge">Recommended</span>}
+                    <h3>{tier.name}</h3>
+                    <p class="pricing-price">{tier.price}<span>{tier.period}</span></p>
+                    <p class="pricing-description">{tier.description}</p>
+                </div>
+            ))}
+        </div>
+        <p class="pricing-note">Migraine Manager is a personal health journal, not a medical device.</p>
+    </section>
+</BaseLayout>
+
+<style>
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        margin-bottom: 2rem;
+        transition: color 0.2s;
+    }
+
+    .back-link:hover {
+        color: var(--text-primary);
+    }
+
+    .hero {
+        margin-bottom: 4rem;
+    }
+
+    h1 {
+        font-size: clamp(2.5rem, 6vw, 3.5rem);
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        margin-bottom: 1rem;
+    }
+
+    .tagline {
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        max-width: 600px;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-badges {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .badge {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 0.375rem 0.75rem;
+        border-radius: var(--radius-sm);
+    }
+
+    .badge--platform {
+        background: var(--accent-subtle);
+        color: var(--text-secondary);
+    }
+
+    .hero-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    /* How it works */
+    .how-it-works {
+        margin-bottom: 4rem;
+    }
+
+    .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+
+    .step {
+        text-align: center;
+        padding: 1.5rem;
+    }
+
+    .step-number {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        background: var(--accent);
+        color: var(--bg-color);
+        border-radius: 50%;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .step h3 {
+        font-size: 1.125rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .step p {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+    }
+
+    /* Benefits */
+    .benefits-section {
+        margin-bottom: 4rem;
+    }
+
+    .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+
+    .benefit-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        padding: 1.5rem;
+        text-align: center;
+    }
+
+    .benefit-icon {
+        font-size: 2rem;
+        display: block;
+        margin-bottom: 1rem;
+    }
+
+    .benefit-card h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .benefit-card p {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+    }
+
+    /* Features */
+    .features-section {
+        margin-bottom: 4rem;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .feature-item {
+        padding: 0.5rem 0;
+    }
+
+    .feature-icon {
+        font-size: 1.5rem;
+        display: block;
+        margin-bottom: 0.75rem;
+    }
+
+    .feature-title {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.375rem;
+    }
+
+    .feature-description {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+    }
+
+    /* Pricing */
+    .pricing-section {
+        margin-bottom: 2rem;
+    }
+
+    .section-description {
+        font-size: 0.9375rem;
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+        max-width: 600px;
+    }
+
+    .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .pricing-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        padding: 2rem;
+        position: relative;
+    }
+
+    .pricing-card--popular {
+        border-color: var(--accent);
+    }
+
+    .popular-badge {
+        position: absolute;
+        top: -0.75rem;
+        right: 1rem;
+        background: var(--accent);
+        color: var(--bg-color);
+        font-size: 0.6875rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        padding: 0.25rem 0.5rem;
+        border-radius: var(--radius-sm);
+    }
+
+    .pricing-card h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .pricing-price {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .pricing-price span {
+        font-size: 1rem;
+        font-weight: 400;
+        color: var(--text-secondary);
+    }
+
+    .pricing-description {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+    }
+
+    .pricing-note {
+        font-size: 0.8125rem;
+        color: var(--text-tertiary);
+        text-align: center;
+    }
+
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 2rem;
+        }
+
+        .tagline {
+            font-size: 1rem;
+        }
+
+        .steps-grid,
+        .benefits-grid,
+        .features-grid,
+        .pricing-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
