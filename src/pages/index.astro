@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 
-const projects = [
+const featured = [
     {
         number: '01',
         name: 'Domain Details',
@@ -20,18 +20,21 @@ const projects = [
     },
     {
         number: '02',
-        name: 'Doodlify',
-        description: 'Turn your photos into cute, 2D flat & colorful doodles with AI.',
-        href: '/projects/doodlify',
-        externalHref: 'https://www.doodlify.ai?ref=simplebytes',
-        subProjects: []
-    },
-    {
-        number: '03',
         name: 'IconBuddy',
         description: 'Search engine for 500K+ open-source icons across 300+ icon sets with editing tools and design integrations.',
         href: '/projects/iconbuddy',
         externalHref: 'https://www.iconbuddy.com?ref=simplebytes',
+        subProjects: []
+    }
+];
+
+const apps = [
+    {
+        number: '03',
+        name: 'Doodlify',
+        description: 'Turn your photos into cute, 2D flat & colorful doodles with AI. Now on iOS and Android.',
+        href: '/projects/doodlify',
+        externalHref: 'https://www.doodlify.ai?ref=simplebytes',
         subProjects: []
     },
     {
@@ -44,38 +47,17 @@ const projects = [
     },
     {
         number: '05',
-        name: 'recommended.by',
-        description: 'Easily share the things you love as simple recommendation lists.',
-        href: '/projects/recommended-by',
-        externalHref: 'https://recommended.by/?ref=simplebytes',
+        name: 'Migraine Manager',
+        description: 'A fast, calm, private migraine tracker — log attacks in one tap, then build a clinician-ready history.',
+        href: '/projects/migraine-manager',
+        externalHref: 'https://migrainemanager.com?ref=simplebytes',
         subProjects: []
-    },
+    }
+];
+
+const tools = [
     {
         number: '06',
-        name: 'Launchpage.xyz',
-        description: 'Free & open source landing pages for newly registered domains.',
-        href: '/projects/launchpage',
-        externalHref: 'https://launchpage.xyz?ref=simplebytes',
-        subProjects: []
-    },
-    {
-        number: '07',
-        name: 'OG Image Tester',
-        description: 'Test and preview Open Graph images for social media sharing.',
-        href: '/projects/og-image-tester',
-        externalHref: 'https://ogimagepreview.com?ref=simplebytes',
-        subProjects: []
-    },
-    {
-        number: '08',
-        name: 'DR Launcher',
-        description: 'Curated database of 30+ directories to quickly boost your Domain Rating.',
-        href: '/projects/drlauncher',
-        externalHref: 'https://www.drlauncher.com?ref=simplebytes',
-        subProjects: []
-    },
-    {
-        number: '09',
         name: 'HyperTxt.ai',
         description: 'AI brand visibility engine that turns brand knowledge and keywords into publish-ready, brand-aware SEO content.',
         href: '/projects/hypertxt',
@@ -83,13 +65,43 @@ const projects = [
         subProjects: []
     },
     {
+        number: '07',
+        name: 'recommended.by',
+        description: 'Easily share the things you love as simple recommendation lists.',
+        href: '/projects/recommended-by',
+        externalHref: 'https://recommended.by/?ref=simplebytes',
+        subProjects: []
+    },
+    {
+        number: '08',
+        name: 'Launchpage.xyz',
+        description: 'Free & open source landing pages for newly registered domains.',
+        href: '/projects/launchpage',
+        externalHref: 'https://launchpage.xyz?ref=simplebytes',
+        subProjects: []
+    },
+    {
+        number: '09',
+        name: 'OG Image Tester',
+        description: 'Test and preview Open Graph images for social media sharing.',
+        href: '/projects/og-image-tester',
+        externalHref: 'https://ogimagepreview.com?ref=simplebytes',
+        subProjects: []
+    },
+    {
         number: '10',
-        name: 'Migraine Manager',
-        description: 'A fast, calm, private migraine tracker — log attacks in one tap, then build a clinician-ready history.',
-        href: '/projects/migraine-manager',
-        externalHref: 'https://migrainemanager.com?ref=simplebytes',
+        name: 'DR Launcher',
+        description: 'Curated database of 30+ directories to quickly boost your Domain Rating.',
+        href: '/projects/drlauncher',
+        externalHref: 'https://www.drlauncher.com?ref=simplebytes',
         subProjects: []
     }
+];
+
+const groups = [
+    { label: 'Featured', description: 'Our flagship platforms.', projects: featured },
+    { label: 'Apps', description: 'Native apps for iOS and Android.', projects: apps },
+    { label: 'Tools', description: 'Focused utilities for everyday work.', projects: tools }
 ];
 ---
 
@@ -99,20 +111,26 @@ const projects = [
         <p class="tagline">A portfolio of digital products creating tiny, easy to use tools for better productivity and focus.</p>
     </div>
 
-    <p class="section-label">Projects</p>
-
-    <div class="projects">
-        {projects.map((project) => (
-            <ProjectCard
-                number={project.number}
-                name={project.name}
-                description={project.description}
-                href={project.href}
-                externalHref={project.externalHref}
-                subProjects={project.subProjects}
-            />
-        ))}
-    </div>
+    {groups.map((group) => (
+        <section class="project-group">
+            <div class="group-heading">
+                <p class="section-label">{group.label}</p>
+                <p class="group-description">{group.description}</p>
+            </div>
+            <div class="projects">
+                {group.projects.map((project) => (
+                    <ProjectCard
+                        number={project.number}
+                        name={project.name}
+                        description={project.description}
+                        href={project.href}
+                        externalHref={project.externalHref}
+                        subProjects={project.subProjects}
+                    />
+                ))}
+            </div>
+        </section>
+    ))}
 </BaseLayout>
 
 <style>
@@ -136,6 +154,27 @@ const projects = [
         line-height: 1.6;
     }
 
+    .project-group {
+        margin-bottom: 3.5rem;
+    }
+
+    .project-group:last-of-type {
+        margin-bottom: 0;
+    }
+
+    .group-heading {
+        margin-bottom: 1.5rem;
+    }
+
+    .group-heading .section-label {
+        margin-bottom: 0.25rem;
+    }
+
+    .group-description {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+    }
+
     .projects {
         display: flex;
         flex-direction: column;
@@ -153,6 +192,10 @@ const projects = [
 
         .tagline {
             font-size: 1rem;
+        }
+
+        .project-group {
+            margin-bottom: 2.5rem;
         }
 
         .projects {
