@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ExternalToolLanding from '../../components/ExternalToolLanding.astro';
+---
+
+<BaseLayout
+    title="Launchpage.xyz - Free Open Source Landing Pages"
+    description="Launchpage.xyz gives newly registered domains a free, open-source landing page while the full site is being built."
+>
+    <ExternalToolLanding
+        label="Launch Tool"
+        name="Launchpage.xyz"
+        description="Replace blank registrar pages with a clean, free, open-source landing page while you build the real site."
+        href="https://launchpage.xyz?ref=simplebytes"
+        cta="Open Launchpage"
+        features={[
+            'Useful for new domains that need a credible page immediately.',
+            'Open-source and deployable to static hosts.',
+            'Designed for simple email capture and lightweight launches.',
+            'A good fit for the Simple Bytes tools hub because it solves a concrete launch problem.'
+        ]}
+    />
+</BaseLayout>

@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ExternalToolLanding from '../../components/ExternalToolLanding.astro';
+---
+
+<BaseLayout
+    title="DomainDetails - Free Domain Research Tools"
+    description="Use DomainDetails for WHOIS, RDAP, DNS, SSL, marketplace search, portfolio tools, browser extension, and developer-friendly domain intelligence."
+>
+    <ExternalToolLanding
+        label="Domain Research"
+        name="DomainDetails"
+        description="DomainDetails brings WHOIS, RDAP, DNS, SSL, and marketplace search into one domain research toolkit - with a browser extension for on-the-go lookups."
+        href="https://www.domaindetails.com?ref=simplebytes"
+        cta="Open DomainDetails"
+        features={[
+            'Look up registration, nameservers, expiration, and registrar data.',
+            'Search domain marketplaces and compare where a domain is listed.',
+            'Use free tools like the browser extension and DomainDetails Academy.',
+            'A major Simple Bytes product with enough depth to deserve a tools-level entry.'
+        ]}
+    />
+</BaseLayout>

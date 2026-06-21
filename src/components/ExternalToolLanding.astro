@@ -1,0 +1,105 @@
+---
+interface Props {
+    label: string;
+    name: string;
+    description: string;
+    href: string;
+    cta: string;
+    features: string[];
+}
+
+const { label, name, description, href, cta, features } = Astro.props;
+---
+
+<section class="tool-hero">
+    <p class="section-label">{label}</p>
+    <h1>{name}</h1>
+    <p class="tagline">{description}</p>
+    <div class="hero-actions">
+        <a href={href} target="_blank" rel="noopener" class="btn btn--primary">{cta} &rarr;</a>
+        <a href="/tools" class="btn btn--secondary">Browse all tools</a>
+    </div>
+</section>
+
+<section class="feature-panel">
+    <h2>Why use it?</h2>
+    <div class="feature-list">
+        {features.map((feature) => (
+            <div class="feature-item">
+                <span></span>
+                <p>{feature}</p>
+            </div>
+        ))}
+    </div>
+</section>
+
+<style>
+    .tool-hero {
+        max-width: 720px;
+        margin-bottom: 2rem;
+    }
+
+    h1 {
+        font-size: clamp(2rem, 5vw, 2.75rem);
+        font-weight: 600;
+        line-height: 1.15;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+    }
+
+    .tagline {
+        font-size: 1.0625rem;
+        color: var(--text-secondary);
+        line-height: 1.7;
+    }
+
+    .hero-actions {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        margin-top: 1.5rem;
+    }
+
+    .feature-panel {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        padding: 1.5rem;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .feature-panel h2 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .feature-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.75rem;
+    }
+
+    .feature-item {
+        display: flex;
+        gap: 0.7rem;
+        align-items: flex-start;
+        color: var(--text-secondary);
+        line-height: 1.55;
+    }
+
+    .feature-item span {
+        width: 0.45rem;
+        height: 0.45rem;
+        border-radius: 999px;
+        background: var(--text-primary);
+        flex: 0 0 auto;
+        margin-top: 0.55rem;
+    }
+
+    @media (max-width: 700px) {
+        .feature-list {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
