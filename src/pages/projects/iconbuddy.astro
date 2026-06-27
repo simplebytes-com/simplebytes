@@ -13,11 +13,62 @@ const stats = [
     { value: '300+', label: 'Icon Sets' },
     { value: '500K+', label: 'Users' }
 ];
+
+const formats = [
+    { title: 'SVG and PNG export', description: 'Download icons for websites, docs, mockups, and product interfaces.' },
+    { title: 'JSX and Vue components', description: 'Move from search to implementation without rebuilding icons by hand.' },
+    { title: 'Design tool workflows', description: 'Use IconBuddy with Figma, VS Code, Framer, WordPress, and Chrome integrations.' }
+];
+
+const faqs = [
+    {
+        question: 'What is IconBuddy?',
+        answer: 'IconBuddy is an icon search engine for finding, customizing, and exporting open-source icons from hundreds of icon sets.'
+    },
+    {
+        question: 'Are IconBuddy icons free?',
+        answer: 'IconBuddy focuses on open-source icon sets. Individual icon licenses can vary, so check the source set when using icons commercially.'
+    },
+    {
+        question: 'What icon formats does IconBuddy support?',
+        answer: 'IconBuddy supports common design and development formats including SVG, PNG, JSX, Vue, and integrations for design and editor workflows.'
+    }
+];
+
+const structuredData = [
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "IconBuddy",
+        "applicationCategory": "DesignApplication",
+        "operatingSystem": "Web",
+        "url": "https://www.iconbuddy.com",
+        "description": "Search, customize, and export 500K+ open-source icons from 300+ icon sets.",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    },
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqs.map((item) => ({
+            "@type": "Question",
+            "name": item.question,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": item.answer
+            }
+        }))
+    }
+];
 ---
 
 <BaseLayout
     title="IconBuddy - 500K+ Free SVG Icons and Icon Search"
     description="Search, customize, and export 500K+ open-source icons from 300+ icon sets. IconBuddy includes SVG, PNG, JSX, Vue, Figma, VS Code, and browser integrations."
+    structuredData={structuredData}
 >
     <a href="/projects" class="back-link">← Projects</a>
 
@@ -36,6 +87,24 @@ const stats = [
             <a href="https://www.iconbuddy.com?ref=simplebytes" target="_blank" rel="noopener" class="btn btn--primary">
                 Browse Icons →
             </a>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2 class="section-title">What Is IconBuddy?</h2>
+        <div class="content-grid">
+            <div class="content-card">
+                <h3>Open-source icon search</h3>
+                <p>Search across hundreds of icon libraries from one interface instead of jumping between separate icon set websites.</p>
+            </div>
+            <div class="content-card">
+                <h3>Customization before export</h3>
+                <p>Adjust icon color, size, and style before downloading assets for a website, app, presentation, or design system.</p>
+            </div>
+            <div class="content-card">
+                <h3>Developer-friendly output</h3>
+                <p>Export icons as production-ready SVG, PNG, JSX, Vue, and other formats used in modern frontend projects.</p>
+            </div>
         </div>
     </section>
 
@@ -61,6 +130,30 @@ const stats = [
             <span class="icon-set-tag">Phosphor (9,000+)</span>
             <span class="icon-set-tag">Solar (7,400+)</span>
             <span class="icon-set-tag">And 290+ more</span>
+        </div>
+    </section>
+
+    <section class="formats-section">
+        <h2 class="section-title">Icon Formats and Integrations</h2>
+        <div class="content-grid">
+            {formats.map((item) => (
+                <div class="content-card">
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                </div>
+            ))}
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <h2 class="section-title">IconBuddy FAQ</h2>
+        <div class="faq-list">
+            {faqs.map((item) => (
+                <div class="faq-item">
+                    <h3>{item.question}</h3>
+                    <p>{item.answer}</p>
+                </div>
+            ))}
         </div>
     </section>
 </BaseLayout>
@@ -165,6 +258,45 @@ const stats = [
         margin-bottom: 2rem;
     }
 
+    .content-section,
+    .formats-section,
+    .faq-section {
+        margin-bottom: 4rem;
+    }
+
+    .content-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+
+    .content-card,
+    .faq-item {
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        padding: 1.5rem;
+    }
+
+    .content-card h3,
+    .faq-item h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .content-card p,
+    .faq-item p {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        line-height: 1.6;
+    }
+
+    .faq-list {
+        display: grid;
+        gap: 1rem;
+        max-width: 760px;
+    }
+
     .tags-grid {
         display: flex;
         flex-wrap: wrap;
@@ -188,7 +320,8 @@ const stats = [
             font-size: 1rem;
         }
 
-        .features-grid {
+        .features-grid,
+        .content-grid {
             grid-template-columns: 1fr;
         }
     }

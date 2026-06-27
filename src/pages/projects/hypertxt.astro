@@ -14,11 +14,64 @@ const pricing = [
     { name: 'Agency', price: '$149', period: '/month', description: '300 articles, 6,000 keyword credits, unlimited projects.', popular: false },
     { name: 'BYOK', price: '$89', period: '/month', description: 'Unlimited articles with your own provider API keys.', popular: false }
 ];
+
+const useCases = [
+    { title: 'Brand-aware SEO articles', description: 'Generate content that uses your saved brand materials instead of generic AI writing patterns.' },
+    { title: 'Keyword-backed planning', description: 'Build drafts from real provider-backed keyword metrics, not fabricated volume guesses.' },
+    { title: 'Publishing workflows', description: 'Move from outline to draft to review, then export to Markdown or publish through integrations.' }
+];
+
+const faqs = [
+    {
+        question: 'What is HyperTxt.ai?',
+        answer: 'HyperTxt.ai is an AI SEO content platform that turns brand knowledge, keyword metrics, and research sources into publish-ready articles.'
+    },
+    {
+        question: 'How is HyperTxt different from a generic AI writer?',
+        answer: 'HyperTxt uses brand materials, website URLs, sitemaps, real keyword metrics, and multi-pass draft workflows to keep content more specific and useful.'
+    },
+    {
+        question: 'Can HyperTxt publish content?',
+        answer: 'HyperTxt supports Markdown export plus publishing integrations including WordPress, Ghost, and webhooks.'
+    }
+];
+
+const structuredData = [
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "HyperTxt.ai",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "url": "https://www.hypertxt.ai",
+        "description": "AI SEO content platform for brand-aware articles, keyword-backed planning, and publishing workflows.",
+        "offers": pricing.map((tier) => ({
+            "@type": "Offer",
+            "name": tier.name,
+            "price": tier.price.replace('$', ''),
+            "priceCurrency": "USD",
+            "description": tier.description
+        }))
+    },
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqs.map((item) => ({
+            "@type": "Question",
+            "name": item.question,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": item.answer
+            }
+        }))
+    }
+];
 ---
 
 <BaseLayout
     title="HyperTxt.ai - AI SEO Content Platform for Brand-Aware Articles"
     description="HyperTxt.ai turns brand knowledge, real keyword metrics, and research sources into publish-ready SEO articles with outline, draft, review, and publishing workflows."
+    structuredData={structuredData}
 >
     <a href="/projects" class="back-link">← Projects</a>
 
@@ -70,6 +123,18 @@ const pricing = [
         </div>
     </section>
 
+    <section class="content-section">
+        <h2 class="section-title">What HyperTxt.ai Helps With</h2>
+        <div class="content-grid">
+            {useCases.map((item) => (
+                <div class="content-card">
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                </div>
+            ))}
+        </div>
+    </section>
+
     <section class="pricing-section">
         <h2 class="section-title">Simple Pricing</h2>
         <p class="section-description">Every feature on every plan. Pick the volume that matches your growth — no feature gating.</p>
@@ -80,6 +145,18 @@ const pricing = [
                     <h3>{tier.name}</h3>
                     <p class="pricing-price">{tier.price}<span>{tier.period}</span></p>
                     <p class="pricing-description">{tier.description}</p>
+                </div>
+            ))}
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <h2 class="section-title">HyperTxt.ai FAQ</h2>
+        <div class="faq-list">
+            {faqs.map((item) => (
+                <div class="faq-item">
+                    <h3>{item.question}</h3>
+                    <p>{item.answer}</p>
                 </div>
             ))}
         </div>
@@ -246,6 +323,44 @@ const pricing = [
         margin-bottom: 4rem;
     }
 
+    .content-section,
+    .faq-section {
+        margin-bottom: 4rem;
+    }
+
+    .content-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+
+    .content-card,
+    .faq-item {
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        padding: 1.5rem;
+    }
+
+    .content-card h3,
+    .faq-item h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .content-card p,
+    .faq-item p {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        line-height: 1.6;
+    }
+
+    .faq-list {
+        display: grid;
+        gap: 1rem;
+        max-width: 760px;
+    }
+
     .pricing-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -347,6 +462,7 @@ const pricing = [
         }
 
         .steps-grid,
+        .content-grid,
         .features-grid,
         .pricing-grid {
             grid-template-columns: 1fr;

@@ -1,0 +1,7 @@
+name = "simplebytes-mail-noindex"
+main = "mail-noindex.js"
+compatibility_date = "2026-06-27"
+
+routes = [
+  { pattern = "mail.simplebytes.com/*", zone_name = "simplebytes.com" }
+]

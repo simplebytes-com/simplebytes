@@ -19,17 +19,77 @@ const stats = [
     { value: '€2.99', label: '/month' },
     { value: '€29.99', label: '/year' }
 ];
+
+const useCases = [
+    { title: 'Use up pantry ingredients', description: 'Turn vegetables, leftovers, and staples into recipes without buying a long list of extras.' },
+    { title: 'Match diet preferences', description: 'Generate ideas around gluten-free, vegan, paleo, and custom dietary needs.' },
+    { title: 'Cook with available equipment', description: 'Filter recipes around the tools you actually have, including stovetop, oven, microwave, and air fryer.' }
+];
+
+const faqs = [
+    {
+        question: 'What is EasyChef.ai?',
+        answer: 'EasyChef.ai is an AI cooking assistant for iOS, Android, and web that creates personalized recipes from ingredients you already have.'
+    },
+    {
+        question: 'Can EasyChef help reduce food waste?',
+        answer: 'Yes. EasyChef is built around ingredient-based recipe generation, so it can suggest meals that use groceries already in your kitchen.'
+    },
+    {
+        question: 'Does EasyChef support diets and cuisines?',
+        answer: 'EasyChef supports global cuisines and dietary preferences including gluten-free, vegan, paleo, and custom restrictions.'
+    }
+];
+
+const structuredData = [
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "EasyChef.ai",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "iOS, Android, Web",
+        "url": "https://easychef.ai",
+        "description": "AI cooking assistant that generates personalized recipes from ingredients you already have.",
+        "offers": [
+            {
+                "@type": "Offer",
+                "price": "2.99",
+                "priceCurrency": "EUR",
+                "description": "Monthly plan"
+            },
+            {
+                "@type": "Offer",
+                "price": "29.99",
+                "priceCurrency": "EUR",
+                "description": "Annual plan"
+            }
+        ]
+    },
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqs.map((item) => ({
+            "@type": "Question",
+            "name": item.question,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": item.answer
+            }
+        }))
+    }
+];
 ---
 
 <BaseLayout
-    title="EasyChef.ai - Simple Bytes"
-    description="Generate personalized recipes based on ingredients you have. AI-powered cooking assistant for iOS and Android."
+    title="EasyChef.ai - AI Cooking Assistant and Recipe Generator"
+    description="EasyChef.ai is an AI cooking assistant for iOS, Android, and web that creates personalized recipes from ingredients, diets, cuisines, and kitchen equipment."
+    structuredData={structuredData}
 >
     <a href="/projects" class="back-link">← Projects</a>
 
     <section class="hero">
         <h1>EasyChef.ai</h1>
-        <p class="tagline">Generate personalized recipes based on ingredients you have. No more wondering what to cook - just tell us what's in your kitchen.</p>
+        <p class="tagline">Generate personalized recipes based on ingredients you have. No more wondering what to cook - tell EasyChef what's in your kitchen, choose preferences, and get meal ideas that fit.</p>
         <div class="hero-badges">
             <span class="badge badge--acquisition">Our First Acquisition</span>
             <span class="badge badge--platform">iOS & Android</span>
@@ -75,6 +135,18 @@ const stats = [
         </div>
     </section>
 
+    <section class="content-section">
+        <h2 class="section-title">What EasyChef.ai Helps With</h2>
+        <div class="content-grid">
+            {useCases.map((item) => (
+                <div class="content-card">
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                </div>
+            ))}
+        </div>
+    </section>
+
     <section class="features-section">
         <h2 class="section-title">Features</h2>
         <div class="features-grid">
@@ -102,6 +174,18 @@ const stats = [
                 <p class="pricing-price">€29.99<span>/year</span></p>
                 <p class="pricing-description">Best value for home cooks</p>
             </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <h2 class="section-title">EasyChef.ai FAQ</h2>
+        <div class="faq-list">
+            {faqs.map((item) => (
+                <div class="faq-item">
+                    <h3>{item.question}</h3>
+                    <p>{item.answer}</p>
+                </div>
+            ))}
         </div>
     </section>
 
@@ -302,6 +386,44 @@ const stats = [
         margin-bottom: 4rem;
     }
 
+    .content-section,
+    .faq-section {
+        margin-bottom: 4rem;
+    }
+
+    .content-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+
+    .content-card,
+    .faq-item {
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        padding: 1.5rem;
+    }
+
+    .content-card h3,
+    .faq-item h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .content-card p,
+    .faq-item p {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        line-height: 1.6;
+    }
+
+    .faq-list {
+        display: grid;
+        gap: 1rem;
+        max-width: 760px;
+    }
+
     .pricing-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -403,6 +525,7 @@ const stats = [
 
         .steps-grid,
         .benefits-grid,
+        .content-grid,
         .features-grid,
         .pricing-grid {
             grid-template-columns: 1fr;

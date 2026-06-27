@@ -5,7 +5,7 @@ date: "2026-03-15"
 category: "acquisition"
 ---
 
-We're excited to announce that Simple Bytes has acquired [IconBuddy.com](https://www.iconbuddy.com), the popular open-source icon search engine used by over 500,000 professionals worldwide.
+We're excited to announce that Simple Bytes has acquired [IconBuddy.com](https://www.iconbuddy.com), the popular open-source icon search engine used by over 500,000 professionals worldwide. You can also read the Simple Bytes portfolio page for [IconBuddy](/projects/iconbuddy).
 
 ## What is IconBuddy?
 

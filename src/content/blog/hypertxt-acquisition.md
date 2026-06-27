@@ -5,7 +5,7 @@ date: "2026-06-01"
 category: "acquisition"
 ---
 
-We're excited to announce that Simple Bytes has acquired [HyperTxt.ai](https://www.hypertxt.ai) — and that, after a full rebuild, HyperTxt relaunched on June 1, 2026.
+We're excited to announce that Simple Bytes has acquired [HyperTxt.ai](https://www.hypertxt.ai) — and that, after a full rebuild, HyperTxt relaunched on June 1, 2026. You can also read the Simple Bytes portfolio page for [HyperTxt.ai](/projects/hypertxt).
 
 ## What is HyperTxt?
 

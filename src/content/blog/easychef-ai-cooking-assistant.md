@@ -5,7 +5,7 @@ date: "2025-09-10"
 category: "acquisition"
 ---
 
-We're happy to announce that EasyChef.ai is the first product to join the Simple Bytes family through acquisition.
+We're happy to announce that EasyChef.ai is the first product to join the Simple Bytes family through acquisition. You can also read the Simple Bytes portfolio page for [EasyChef.ai](/projects/easychef).
 
 ## What is EasyChef?
 
