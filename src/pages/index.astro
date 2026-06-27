@@ -58,6 +58,13 @@ const apps = [
 const tools = [
     {
         number: '06',
+        name: 'DR Tracker',
+        description: 'Track DR snapshots over time with charts, calendar views, and daily refreshes powered by Ahrefs.',
+        href: '/tools/dr-tracker',
+        subProjects: []
+    },
+    {
+        number: '07',
         name: 'HyperTxt.ai',
         description: 'AI brand visibility engine that turns brand knowledge and keywords into publish-ready, brand-aware SEO content.',
         href: '/projects/hypertxt',
@@ -65,7 +72,7 @@ const tools = [
         subProjects: []
     },
     {
-        number: '07',
+        number: '08',
         name: 'recommended.by',
         description: 'Easily share the things you love as simple recommendation lists.',
         href: '/projects/recommended-by',
@@ -73,7 +80,7 @@ const tools = [
         subProjects: []
     },
     {
-        number: '08',
+        number: '09',
         name: 'Launchpage.xyz',
         description: 'Free & open source landing pages for newly registered domains.',
         href: '/projects/launchpage',
@@ -81,7 +88,7 @@ const tools = [
         subProjects: []
     },
     {
-        number: '09',
+        number: '10',
         name: 'OG Image Tester',
         description: 'Test and preview Open Graph images for social media sharing.',
         href: '/projects/og-image-tester',
@@ -89,7 +96,7 @@ const tools = [
         subProjects: []
     },
     {
-        number: '10',
+        number: '11',
         name: 'DR Launcher',
         description: 'Curated database of 30+ directories to quickly boost your Domain Rating.',
         href: '/projects/drlauncher',
@@ -119,7 +126,7 @@ const groups = [
     </div>
 
     {groups.map((group) => (
-        <section class="project-group">
+        <section class="project-group" id={group.label === 'Tools' ? 'tools' : undefined}>
             <div class="group-heading">
                 <p class="section-label">{group.label}</p>
                 <p class="group-description">{group.description}</p>
