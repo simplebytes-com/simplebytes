@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ExternalToolLanding from '../../components/ExternalToolLanding.astro';
+---
+
+<BaseLayout
+    title="Free OG Image Tester - Simple Bytes"
+    description="Preview and debug Open Graph images before sharing links on social platforms. Free social card testing from Simple Bytes."
+>
+    <ExternalToolLanding
+        label="Publishing Tool"
+        name="OG Image Tester"
+        description="Preview and debug social cards before a page goes live. Check how your Open Graph image and link preview will appear when shared."
+        href="https://ogimagepreview.com?ref=simplebytes"
+        cta="Open OG Image Tester"
+        features={[
+            'Catch broken or missing Open Graph images before sharing.',
+            'Useful for launches, blog posts, product pages, and landing pages.',
+            'No heavy workflow: paste a URL, preview, then fix.',
+            'Fits naturally beside the QR code generator for publishing work.'
+        ]}
+    />
+</BaseLayout>
