@@ -190,6 +190,14 @@ body {
     margin-bottom: 2rem;
 }
 
+.feature-marker {
+    display: block;
+    width: 1.5rem;
+    height: 2px;
+    background: var(--border-hover);
+    margin-bottom: 0.875rem;
+}
+
 /* Tags */
 .tag {
     display: inline-block;

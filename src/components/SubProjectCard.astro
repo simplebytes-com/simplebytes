@@ -7,11 +7,11 @@ interface Props {
     tag?: 'free' | 'opensource' | 'pro';
 }
 
-const { name, description, href, icon, tag } = Astro.props;
+const { name, description, href, tag } = Astro.props;
 ---
 
 <a href={href} target="_blank" rel="noopener" class="sub-project">
-    <span class="icon">{icon}</span>
+    <span class="sub-project-marker"></span>
     <div class="content">
         <span class="name">{name}</span>
         {tag && (
@@ -43,8 +43,10 @@ const { name, description, href, icon, tag } = Astro.props;
         transform: translateY(-1px);
     }
 
-    .icon {
-        font-size: 1.25rem;
+    .sub-project-marker {
+        width: 1rem;
+        height: 2px;
+        background: var(--border-hover);
         flex-shrink: 0;
     }
 
