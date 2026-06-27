@@ -7,19 +7,20 @@ interface Props {
     title: string;
     description?: string;
     image?: string;
+    structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
     title,
     description = "A portfolio of digital products creating tiny, easy to use tools for better productivity and focus.",
-    image = "/img/og-image.png"
+    image = "/img/og-image.png",
+    structuredData: pageStructuredData
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, "https://simplebytes.com");
 const imageURL = new URL(image, "https://simplebytes.com");
 
-// Structured data for organization
-const structuredData = {
+const organizationStructuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Simple Bytes",
@@ -30,6 +31,11 @@ const structuredData = {
         "https://github.com/simplebytes-com"
     ]
 };
+
+const structuredDataItems = [
+    organizationStructuredData,
+    ...(Array.isArray(pageStructuredData) ? pageStructuredData : pageStructuredData ? [pageStructuredData] : [])
+];
 ---
 
 <!DOCTYPE html>
@@ -59,7 +65,9 @@ const structuredData = {
     <meta name="twitter:image" content={imageURL}>
 
     <!-- Structured Data -->
-    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    {structuredDataItems.map((item) => (
+        <script type="application/ld+json" set:html={JSON.stringify(item)} />
+    ))}
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/img/favicon-96x96.png" sizes="96x96">
@@ -69,7 +77,42 @@ const structuredData = {
     <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
 
+    <script is:inline>
+        (function() {
+            var t = localStorage.getItem('theme');
+            if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+
     <!-- Analytics -->
+    <script is:inline>
+        window.op = window.op || function() {
+            var queue = [];
+            return new Proxy(function() {
+                arguments.length && queue.push([].slice.call(arguments));
+            }, {
+                get: function(_target, property) {
+                    return property === 'q' ? queue : function() {
+                        queue.push([property].concat([].slice.call(arguments)));
+                    };
+                },
+                has: function(_target, property) {
+                    return property === 'q';
+                }
+            });
+        }();
+
+        window.op('init', {
+            apiUrl: 'https://api.op.simplebytes.com',
+            clientId: '3d511e20-e7f7-4078-b7a1-8e9774f0494d',
+            trackScreenViews: true,
+            trackOutgoingLinks: true,
+            trackAttributes: true,
+        });
+    </script>
+    <script src="https://op.simplebytes.com/op1.js" defer async is:inline></script>
     <script defer data-domain="simplebytes.com" src="https://analytics.simplebytes.com/js/script.outbound-links.js"></script>
 </head>
 
@@ -84,18 +127,11 @@ const structuredData = {
     </div>
 
     <script>
-        // Dark mode functionality
         const toggle = document.querySelector('.theme-toggle') as HTMLButtonElement;
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-
-        // Set initial theme
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark' || (!savedTheme && prefersDark.matches)) {
-            document.documentElement.setAttribute('data-theme', 'dark');
+        if (document.documentElement.getAttribute('data-theme') === 'dark') {
             toggle?.setAttribute('aria-checked', 'true');
         }
 
-        // Toggle theme
         toggle?.addEventListener('click', () => {
             const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
             if (isDark) {

@@ -1,23 +1,56 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ExternalToolLanding from '../../components/ExternalToolLanding.astro';
+
+const features = [
+    'A clean placeholder page for newly registered domains.',
+    'Useful before the real product site is ready.',
+    'Open-source and designed for simple static deployment.',
+    'Part of the Simple Bytes launch toolkit.'
+];
 ---
 
 <BaseLayout
-    title="Launchpage.xyz - Free Open Source Landing Pages"
-    description="Launchpage.xyz gives newly registered domains a free, open-source landing page while the full site is being built."
+    title="LaunchPage.xyz - Launch Tool by Simple Bytes"
+    description="LaunchPage.xyz is a Simple Bytes launch tool for putting a clean page on a new domain while the full product or website is still being built."
 >
-    <ExternalToolLanding
-        label="Launch Tool"
-        name="Launchpage.xyz"
-        description="Replace blank registrar pages with a clean, free, open-source landing page while you build the real site."
-        href="https://launchpage.xyz?ref=simplebytes"
-        cta="Open Launchpage"
-        features={[
-            'Useful for new domains that need a credible page immediately.',
-            'Open-source and deployable to static hosts.',
-            'Designed for simple email capture and lightweight launches.',
-            'A good fit for the Simple Bytes tools hub because it solves a concrete launch problem.'
-        ]}
-    />
+    <a href="/tools" class="back-link">← Tools</a>
+
+    <section class="tool-hero">
+        <p class="section-label">Launch Tool</p>
+        <h1>LaunchPage.xyz</h1>
+        <p class="tagline">
+            LaunchPage gives a new domain a useful page immediately, instead of leaving it parked or blank while the real site is still being built.
+        </p>
+        <div class="hero-actions">
+            <a href="https://launchpage.xyz?ref=simplebytes" target="_blank" rel="noopener" class="btn btn--primary">Launch LaunchPage →</a>
+            <a href="/projects/launchpage" class="btn btn--secondary">Read portfolio page</a>
+        </div>
+    </section>
+
+    <section class="detail-panel">
+        <h2>Why we use it</h2>
+        <div class="feature-list">
+            {features.map((feature) => (
+                <div class="feature-item">
+                    <span></span>
+                    <p>{feature}</p>
+                </div>
+            ))}
+        </div>
+    </section>
 </BaseLayout>
+
+<style>
+    .back-link { display: inline-flex; color: var(--text-secondary); text-decoration: none; margin-bottom: 2rem; font-size: 0.875rem; }
+    .back-link:hover { color: var(--text-primary); }
+    .tool-hero { max-width: 760px; margin-bottom: 2.5rem; }
+    h1 { font-size: clamp(2.4rem, 5vw, 3.5rem); font-weight: 650; line-height: 1.08; margin-bottom: 1rem; }
+    .tagline { color: var(--text-secondary); font-size: 1.125rem; line-height: 1.7; }
+    .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem; }
+    .detail-panel { padding: 1.5rem; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-lg); }
+    .detail-panel h2 { font-size: 1.25rem; margin-bottom: 1rem; }
+    .feature-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem; }
+    .feature-item { display: flex; gap: 0.7rem; color: var(--text-secondary); line-height: 1.6; }
+    .feature-item span { width: 1rem; height: 2px; flex: 0 0 auto; margin-top: 0.75rem; background: var(--border-hover); }
+    @media (max-width: 700px) { .feature-list { grid-template-columns: 1fr; } }
+</style>

@@ -19,11 +19,11 @@ const stats = [
     title="IconBuddy - Simple Bytes"
     description="Search engine for 500K+ open-source icons across 300+ icon sets with editing tools and design integrations."
 >
-    <a href="/about" class="back-link">← Back to Simple Bytes portfolio</a>
+    <a href="/projects" class="back-link">← Projects</a>
 
     <section class="hero">
         <h1>IconBuddy</h1>
-        <p class="tagline">The ultimate search engine for open-source icons. Find, customize, and download from 500,000+ icons across 300+ icon sets — all in one place. Acquired by Simple Bytes in March 2026 as a strategic investment.</p>
+        <p class="tagline">Search, customize, and download from 500,000+ open-source icons across 300+ icon sets. Acquired by Simple Bytes in March 2026.</p>
         <div class="stats-row">
             {stats.map((stat) => (
                 <div class="stat">
@@ -44,7 +44,7 @@ const stats = [
         <div class="features-grid">
             {features.map((feature) => (
                 <div class="feature-item">
-                    <span class="feature-icon">{feature.icon}</span>
+                    <span class="feature-marker"></span>
                     <h3 class="feature-title">{feature.title}</h3>
                     <p class="feature-description">{feature.description}</p>
                 </div>

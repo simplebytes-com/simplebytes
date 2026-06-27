@@ -19,6 +19,31 @@ const categoryLabels: Record<string, string> = {
     insights: 'Insights',
 };
 
+const postUrl = new URL(`/blog/${post.id}`, 'https://simplebytes.com').toString();
+const blogPostStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.data.title,
+    "description": post.data.description,
+    "datePublished": post.data.date,
+    "dateModified": post.data.date,
+    "url": postUrl,
+    "author": {
+        "@type": "Organization",
+        "name": "Simple Bytes",
+        "url": "https://simplebytes.com"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Simple Bytes",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://simplebytes.com/img/logo.png"
+        }
+    },
+    "articleSection": categoryLabels[post.data.category] || post.data.category,
+};
+
 function formatDate(dateStr: string) {
     return new Date(dateStr).toLocaleDateString('en-US', {
         year: 'numeric',
@@ -31,8 +56,9 @@ function formatDate(dateStr: string) {
 <BaseLayout
     title={`${post.data.title} - Simple Bytes`}
     description={post.data.description}
+    structuredData={blogPostStructuredData}
 >
-    <a href="/blog" class="back-link">← Back to blog</a>
+    <a href="/blog" class="back-link">← Blog</a>
 
     <article class="post">
         <header class="post-header">

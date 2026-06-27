@@ -1,191 +1,284 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
 
-const featuredTools = [
+const posts = (await getCollection('blog')).sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+).slice(0, 3);
+
+const categoryLabels: Record<string, string> = {
+    acquisition: 'Acquisition',
+    product: 'Product',
+    insights: 'Insights',
+};
+
+function formatDate(dateStr: string) {
+    return new Date(dateStr).toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+    });
+}
+
+const usableTools = [
     {
         name: 'QR Code Generator',
-        description: 'Create fully customized QR codes for free. No account, no watermark, local-first in your browser, with PNG and SVG export.',
+        description: 'Fully local, private & free QR code generator with logo uploads, colors, shapes, and PNG or SVG export.',
         href: '/tools/qr-code-generator',
-        tag: 'Local browser tool',
-        cta: 'Create a QR code'
     },
     {
         name: 'DR Tracker',
-        description: 'Track Domain Rating changes while you build backlinks and launch new projects.',
-        href: '/tools/dr-tracker',
-        tag: 'Free SEO tool',
-        cta: 'Track DR'
-    },
-    {
-        name: 'DomainDetails',
-        description: 'Look up WHOIS, RDAP, DNS, SSL, marketplace listings, and domain intelligence tools.',
-        href: '/tools/domain-details',
-        tag: 'Domain research',
-        cta: 'Research a domain'
+        description: 'Save domains and watch Domain Rating changes over time while you build links and launch projects.',
+        href: '/tools/dr-tracker/app',
     },
     {
         name: 'OG Image Tester',
-        description: 'Preview and debug social sharing cards before your links go live on X, LinkedIn, Facebook, Slack, and more.',
-        href: '/tools/og-image-tester',
-        tag: 'Social preview',
-        cta: 'Test a URL'
+        description: 'Preview link cards before publishing so X, LinkedIn, Facebook, Slack, and Discord show the right image.',
+        href: 'https://ogimagepreview.com?ref=simplebytes',
+    },
+    {
+        name: 'LaunchPage.xyz',
+        description: 'Put a real page on a new domain while the full site is still being built.',
+        href: 'https://launchpage.xyz?ref=simplebytes',
     }
 ];
 
-const moreTools = [
+const companies = [
     {
-        name: 'Launchpage.xyz',
-        description: 'Free and open-source landing pages for newly registered domains.',
-        href: '/tools/launchpage',
+        name: 'DomainDetails',
+        description: 'Domain research, WHOIS, RDAP, DNS, SSL checks, marketplace search, portfolio tools, and developer APIs.',
+        href: '/projects/domain-details',
+        scope: 'Domain intelligence platform',
     },
     {
-        name: 'Domain Marketplace Search',
-        description: 'Check domain listings across multiple marketplaces from the DomainDetails toolkit.',
-        href: 'https://www.domaindetails.com/marketplace?ref=simplebytes',
+        name: 'IconBuddy',
+        description: 'Search, edit, and export icons from hundreds of open-source icon sets.',
+        href: '/projects/iconbuddy',
+        scope: 'Icon search engine',
     },
     {
-        name: 'DomainDetails Browser Extension',
-        description: 'Research domains directly while you browse.',
-        href: 'https://www.domaindetails.com/extension?ref=simplebytes',
+        name: 'EasyChef.ai',
+        description: 'Recipe generation and cooking workflows built around the ingredients people already have.',
+        href: '/projects/easychef',
+        scope: 'AI cooking app',
+    },
+    {
+        name: 'Doodlify',
+        description: 'Mobile AI photo-to-doodle app for fast, playful image transformations.',
+        href: '/projects/doodlify',
+        scope: 'iOS and Android app',
+    },
+    {
+        name: 'Migraine Manager',
+        description: 'A calm migraine tracking app for quick logs, history, and clinician-ready notes.',
+        href: '/projects/migraine-manager',
+        scope: 'Health tracking app',
+    },
+    {
+        name: 'HyperTxt.ai',
+        description: 'SEO content workflows that turn brand knowledge and keyword strategy into publish-ready pages.',
+        href: '/projects/hypertxt',
+        scope: 'SEO content platform',
     }
+];
+
+const domainTools = [
+    { name: 'DomainDetails Marketplace Search', href: 'https://www.domaindetails.com/marketplace?ref=simplebytes' },
+    { name: 'DomainDetails Extension', href: 'https://www.domaindetails.com/extension?ref=simplebytes' },
+    { name: 'DomainDetails Academy', href: 'https://www.domaindetails.com/academy?ref=simplebytes' },
 ];
 ---
 
 <BaseLayout
-    title="Simple Bytes - Free Tools That Respect Your Time"
-    description="Free tools by Simple Bytes: local-first QR code generator, domain rating tracker, DomainDetails domain research, and OG image tester. No account required."
+    title="Simple Bytes - Tools and Products We Build"
+    description="Simple Bytes builds and operates focused tools, apps, and companies for domains, SEO, publishing, icons, cooking, health, and productivity."
+    structuredData={{
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Simple Bytes tools and products",
+        "itemListElement": [...usableTools, ...companies].map((item, index) => ({
+            "@type": "ListItem",
+            "position": index + 1,
+            "name": item.name,
+            "url": item.href.startsWith('http') ? item.href : `https://simplebytes.com${item.href}`
+        }))
+    }}
 >
     <section class="hero">
-        <p class="section-label">Simple Bytes Tools</p>
-        <h1>Free tools that respect your time.</h1>
-        <p class="tagline">
-            Simple Bytes builds small, useful tools for domains, SEO, launch work, and web publishing. Start with the free tools below - no account required.
-        </p>
-        <div class="hero-actions">
-            <a href="/tools" class="btn btn--primary">Browse all tools</a>
-            <a href="/about" class="btn btn--secondary">About Simple Bytes</a>
+        <div class="hero-left">
+            <p class="section-label">Product Studio</p>
+            <h1>Free tools that don't waste your time.</h1>
+        </div>
+        <div class="hero-right">
+            <p class="tagline">
+                Simple Bytes builds and operates focused software for domains, SEO, publishing, and everyday work — from small browser tools to full platforms.
+            </p>
         </div>
     </section>
 
-    <section class="tools-section" aria-labelledby="featured-tools">
-        <div class="section-heading">
-            <h2 id="featured-tools">Featured free tools</h2>
-            <p>Free browser-based tools for domains, SEO, and web publishing.</p>
+    <section class="section-block" id="tools" aria-labelledby="tools-heading">
+        <div class="section-top">
+            <div class="section-heading">
+                <h2 id="tools-heading">Open a tool</h2>
+                <p>Pick what you need — each one works immediately.</p>
+            </div>
+            <a href="/tools" class="section-link">All tools &rarr;</a>
         </div>
 
-        <div class="featured-grid">
-            {featuredTools.map((tool) => (
-                <a class="tool-card tool-card--featured" href={tool.href}>
-                    <span class="tool-tag">{tool.tag}</span>
-                    <h3>{tool.name}</h3>
-                    <p>{tool.description}</p>
-                    <span class="tool-cta">{tool.cta} &rarr;</span>
-                </a>
-            ))}
-        </div>
-    </section>
-
-    <section class="tools-section" aria-labelledby="more-tools">
-        <div class="section-heading">
-            <h2 id="more-tools">More from Simple Bytes</h2>
-            <p>More utilities from Simple Bytes.</p>
-        </div>
-
-        <div class="compact-grid">
-            {moreTools.map((tool) => (
+        <div class="tool-grid">
+            {usableTools.map((tool) => (
                 <a class="tool-card" href={tool.href}>
                     <h3>{tool.name}</h3>
                     <p>{tool.description}</p>
-                    <span class="tool-cta">Open tool &rarr;</span>
+                    <span class="tool-cta">Launch &rarr;</span>
                 </a>
             ))}
         </div>
     </section>
 
-    <section class="portfolio-link" aria-labelledby="portfolio-heading">
-        <p class="section-label">Portfolio</p>
-        <h2 id="portfolio-heading">Products by Simple Bytes</h2>
-        <p>Explore the full Simple Bytes portfolio, including DomainDetails, IconBuddy, EasyChef, Migraine Manager, HyperTxt, and more.</p>
-        <a href="/about" class="btn btn--secondary">View the portfolio</a>
+    <section class="section-block" id="products" aria-labelledby="products-heading">
+        <div class="section-top">
+            <div class="section-heading">
+                <p class="section-label">Products</p>
+                <h2 id="products-heading">Products we build and operate</h2>
+                <p>Larger products from Simple Bytes — built or acquired, each following the same principle: be useful without wasting your time.</p>
+            </div>
+            <a href="/projects" class="section-link">All projects &rarr;</a>
+        </div>
+
+        <div class="product-list">
+            {companies.map((company) => (
+                <a class="product-row" href={company.href}>
+                    <strong>{company.name}</strong>
+                    <span class="product-scope">{company.scope}</span>
+                    <p>{company.description}</p>
+                </a>
+            ))}
+        </div>
     </section>
+
+    <section class="section-block domain-strip" aria-labelledby="domain-heading">
+        <div>
+            <p class="section-label">Domain Stack</p>
+            <h2 id="domain-heading">Domain and launch tools</h2>
+            <p class="domain-desc">Built and used across our own product launches.</p>
+        </div>
+        <div class="domain-links">
+            {domainTools.map((tool) => (
+                <a href={tool.href} target="_blank" rel="noopener">{tool.name} &rarr;</a>
+            ))}
+        </div>
+    </section>
+
+    {posts.length > 0 && (
+        <section class="section-block" aria-labelledby="blog-heading">
+            <div class="section-top">
+                <div class="section-heading">
+                    <h2 id="blog-heading">From the blog</h2>
+                </div>
+                <a href="/blog" class="section-link">All posts &rarr;</a>
+            </div>
+            <div class="blog-row">
+                {posts.map((post) => (
+                    <a class="blog-item" href={`/blog/${post.id}`}>
+                        <span class="blog-meta">
+                            <span class="blog-cat">{categoryLabels[post.data.category] || post.data.category}</span>
+                            <span class="blog-date">{formatDate(post.data.date)}</span>
+                        </span>
+                        <strong>{post.data.title}</strong>
+                        <p>{post.data.description}</p>
+                    </a>
+                ))}
+            </div>
+        </section>
+    )}
 </BaseLayout>
 
 <style>
+    /* --- Hero --- */
     .hero {
-        margin-bottom: 3.5rem;
-        max-width: 720px;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 3rem;
+        align-items: end;
+        margin-bottom: 4.5rem;
+        padding-bottom: 2.5rem;
+        border-bottom: 1px solid var(--border-color);
     }
 
     h1 {
-        font-size: clamp(2.25rem, 6vw, 3.5rem);
-        font-weight: 600;
+        font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+        font-weight: 700;
         line-height: 1.08;
+        letter-spacing: -0.025em;
         color: var(--text-primary);
-        margin-bottom: 1rem;
     }
 
     .tagline {
-        font-size: 1.125rem;
+        font-size: 1.05rem;
         color: var(--text-secondary);
-        max-width: 620px;
-        line-height: 1.65;
+        line-height: 1.7;
     }
 
-    .hero-actions {
+    /* --- Shared --- */
+    .section-block {
+        margin-bottom: 4rem;
+    }
+
+    .section-top {
         display: flex;
-        gap: 0.75rem;
-        flex-wrap: wrap;
-        margin-top: 1.5rem;
-    }
-
-    .tools-section {
-        margin-bottom: 3.5rem;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 1.5rem;
     }
 
     .section-heading {
-        margin-bottom: 1.25rem;
+        max-width: 700px;
     }
 
-    .section-heading h2,
-    .portfolio-link h2 {
-        font-size: 1.35rem;
+    .section-link {
+        font-size: 0.8125rem;
+        color: var(--text-tertiary);
+        text-decoration: none;
+        white-space: nowrap;
+        flex-shrink: 0;
+        transition: color 0.2s var(--transition);
+    }
+
+    .section-link:hover {
+        color: var(--text-primary);
+    }
+
+    .section-heading h2 {
+        font-size: 1.45rem;
         font-weight: 600;
         color: var(--text-primary);
-        margin-bottom: 0.35rem;
+        margin-bottom: 0.45rem;
     }
 
-    .section-heading p,
-    .portfolio-link p {
+    .section-heading p {
         color: var(--text-secondary);
-        line-height: 1.55;
+        line-height: 1.65;
     }
 
-    .featured-grid,
-    .compact-grid {
+    /* --- Tool cards --- */
+    .tool-grid {
         display: grid;
-        gap: 1rem;
-    }
-
-    .featured-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .compact-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
     }
 
     .tool-card {
         display: flex;
         flex-direction: column;
-        min-height: 100%;
+        min-height: 220px;
         padding: 1.25rem;
         background: var(--card-bg);
         border: 1px solid var(--border-color);
         border-radius: var(--radius-lg);
-        text-decoration: none;
         color: inherit;
+        text-decoration: none;
         box-shadow: var(--shadow-sm);
-        transition: border-color 0.2s var(--transition), box-shadow 0.2s var(--transition), transform 0.2s var(--transition);
+        transition: border-color 0.2s var(--transition), transform 0.2s var(--transition), box-shadow 0.2s var(--transition);
     }
 
     .tool-card:hover {
@@ -195,10 +288,10 @@ const moreTools = [
     }
 
     .tool-card h3 {
-        font-size: 1.125rem;
+        margin: 0 0 0.5rem;
+        font-size: 1.2rem;
         font-weight: 600;
         color: var(--text-primary);
-        margin-bottom: 0.45rem;
     }
 
     .tool-card p {
@@ -208,55 +301,214 @@ const moreTools = [
         line-height: 1.55;
     }
 
-    .tool-tag {
-        width: fit-content;
+    .tool-cta {
+        margin-top: 1.2rem;
+        color: var(--text-primary);
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    /* --- Product list --- */
+    .product-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .product-row {
+        display: grid;
+        grid-template-columns: 180px 1fr;
+        gap: 0.15rem 1.5rem;
+        align-items: baseline;
+        padding: 1.1rem 0;
+        border-bottom: 1px solid var(--border-color);
+        color: inherit;
+        text-decoration: none;
+        transition: background 0.15s var(--transition);
+    }
+
+    .product-row:first-child {
+        border-top: 1px solid var(--border-color);
+    }
+
+    .product-row:hover {
+        background: var(--accent-subtle);
+    }
+
+    .product-row strong {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+
+    .product-scope {
         font-family: 'Geist Mono', monospace;
         font-size: 0.6875rem;
         color: var(--text-tertiary);
         text-transform: uppercase;
         letter-spacing: 0.08em;
-        margin-bottom: 0.8rem;
     }
 
-    .tool-cta {
-        display: inline-flex;
-        margin-top: 1.1rem;
-        color: var(--text-primary);
-        font-size: 0.875rem;
-        font-weight: 500;
+    .product-row p {
+        grid-column: 2;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        line-height: 1.55;
     }
 
-    .portfolio-link {
+    /* --- Domain strip --- */
+    .domain-strip {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: center;
+        padding: 1.5rem;
         background: var(--card-bg);
         border: 1px solid var(--border-color);
         border-radius: var(--radius-lg);
-        padding: 1.5rem;
-        max-width: 760px;
     }
 
-    .portfolio-link .btn {
-        margin-top: 1rem;
+    .domain-strip h2 {
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.45rem;
     }
 
-    @media (max-width: 820px) {
-        .featured-grid,
-        .compact-grid {
+    .domain-desc {
+        color: var(--text-secondary);
+        line-height: 1.65;
+    }
+
+    .domain-links {
+        display: grid;
+        gap: 0.75rem;
+    }
+
+    .domain-links a {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.9rem 1rem;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-sm);
+        color: var(--text-primary);
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .domain-links a:hover {
+        border-color: var(--border-hover);
+    }
+
+    /* --- Blog row --- */
+    .blog-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.75rem;
+    }
+
+    .blog-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1.15rem;
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-md);
+        color: inherit;
+        text-decoration: none;
+        transition: border-color 0.2s var(--transition), box-shadow 0.2s var(--transition);
+    }
+
+    .blog-item:hover {
+        border-color: var(--border-hover);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .blog-meta {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+    }
+
+    .blog-cat {
+        font-size: 0.6875rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--text-secondary);
+        background: var(--accent-subtle);
+        padding: 0.15rem 0.4rem;
+        border-radius: 4px;
+    }
+
+    .blog-date {
+        font-size: 0.75rem;
+        color: var(--text-tertiary);
+    }
+
+    .blog-item strong {
+        font-size: 0.9375rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        line-height: 1.35;
+    }
+
+    .blog-item p {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        line-height: 1.55;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 960px) {
+        .domain-strip {
             grid-template-columns: 1fr;
         }
 
+        .tool-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
     }
 
     @media (max-width: 640px) {
         .hero {
-            margin-bottom: 2.5rem;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
         }
 
         h1 {
-            font-size: 2rem;
+            font-size: 2.1rem;
         }
 
         .tagline {
             font-size: 1rem;
+        }
+
+        .tool-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .tool-card {
+            min-height: 0;
+        }
+
+        .product-row {
+            grid-template-columns: 1fr;
+        }
+
+        .product-row p {
+            grid-column: 1;
+        }
+
+        .blog-row {
+            grid-template-columns: 1fr;
+        }
+
+        .domain-strip {
+            grid-template-columns: 1fr;
         }
     }
 </style>

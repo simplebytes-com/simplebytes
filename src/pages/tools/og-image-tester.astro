@@ -1,23 +1,56 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ExternalToolLanding from '../../components/ExternalToolLanding.astro';
+
+const features = [
+    'Preview how a URL appears on social and messaging platforms.',
+    'Catch missing titles, descriptions, and preview images before launch.',
+    'Useful for product launches, blog posts, landing pages, and client work.',
+    'Operated by Simple Bytes as a focused publishing utility.'
+];
 ---
 
 <BaseLayout
-    title="Free OG Image Tester - Simple Bytes"
-    description="Preview and debug Open Graph images before sharing links on social platforms. Free social card testing from Simple Bytes."
+    title="OG Image Tester - Publishing Tool by Simple Bytes"
+    description="OG Image Tester is a Simple Bytes publishing tool for previewing social link cards and Open Graph images before a page goes live."
 >
-    <ExternalToolLanding
-        label="Publishing Tool"
-        name="OG Image Tester"
-        description="Preview and debug social cards before a page goes live. Check how your Open Graph image and link preview will appear when shared."
-        href="https://ogimagepreview.com?ref=simplebytes"
-        cta="Open OG Image Tester"
-        features={[
-            'Catch broken or missing Open Graph images before sharing.',
-            'Useful for launches, blog posts, product pages, and landing pages.',
-            'No heavy workflow: paste a URL, preview, then fix.',
-            'Fits naturally beside the QR code generator for publishing work.'
-        ]}
-    />
+    <a href="/tools" class="back-link">← Tools</a>
+
+    <section class="tool-hero">
+        <p class="section-label">Publishing Tool</p>
+        <h1>OG Image Tester</h1>
+        <p class="tagline">
+            OG Image Tester helps you verify how a page will look when it is shared, before broken metadata turns into a messy launch.
+        </p>
+        <div class="hero-actions">
+            <a href="https://ogimagepreview.com?ref=simplebytes" target="_blank" rel="noopener" class="btn btn--primary">Launch OG Image Tester →</a>
+            <a href="/projects/og-image-tester" class="btn btn--secondary">Read portfolio page</a>
+        </div>
+    </section>
+
+    <section class="detail-panel">
+        <h2>What it helps with</h2>
+        <div class="feature-list">
+            {features.map((feature) => (
+                <div class="feature-item">
+                    <span></span>
+                    <p>{feature}</p>
+                </div>
+            ))}
+        </div>
+    </section>
 </BaseLayout>
+
+<style>
+    .back-link { display: inline-flex; color: var(--text-secondary); text-decoration: none; margin-bottom: 2rem; font-size: 0.875rem; }
+    .back-link:hover { color: var(--text-primary); }
+    .tool-hero { max-width: 760px; margin-bottom: 2.5rem; }
+    h1 { font-size: clamp(2.4rem, 5vw, 3.5rem); font-weight: 650; line-height: 1.08; margin-bottom: 1rem; }
+    .tagline { color: var(--text-secondary); font-size: 1.125rem; line-height: 1.7; }
+    .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem; }
+    .detail-panel { padding: 1.5rem; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-lg); }
+    .detail-panel h2 { font-size: 1.25rem; margin-bottom: 1rem; }
+    .feature-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem; }
+    .feature-item { display: flex; gap: 0.7rem; color: var(--text-secondary); line-height: 1.6; }
+    .feature-item span { width: 1rem; height: 2px; flex: 0 0 auto; margin-top: 0.75rem; background: var(--border-hover); }
+    @media (max-width: 700px) { .feature-list { grid-template-columns: 1fr; } }
+</style>

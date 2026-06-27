@@ -13,11 +13,11 @@ const features = [
     title="recommended.by - Simple Bytes"
     description="Easily share the things you love as simple recommendation lists."
 >
-    <a href="/about" class="back-link">&larr; Back to Simple Bytes portfolio</a>
+    <a href="/projects" class="back-link">← Projects</a>
 
     <section class="hero">
         <h1>recommended.by</h1>
-        <p class="tagline">Easily share the things you love as simple recommendation lists. Create and share curated lists of your favorite things with anyone.</p>
+        <p class="tagline">Create clean, shareable recommendation lists for books, tools, restaurants, podcasts — anything you want to recommend.</p>
         <div class="hero-links">
             <a href="https://recommended.by/?ref=simplebytes" target="_blank" rel="noopener" class="btn btn--primary">
                 Visit recommended.by &rarr;
@@ -51,7 +51,7 @@ const features = [
         <div class="features-grid">
             {features.map((feature) => (
                 <div class="feature-item">
-                    <span class="feature-icon">{feature.icon}</span>
+                    <span class="feature-marker"></span>
                     <h3 class="feature-title">{feature.title}</h3>
                     <p class="feature-description">{feature.description}</p>
                 </div>

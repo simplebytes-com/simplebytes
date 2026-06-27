@@ -1,140 +1,114 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const localTools = [
+const tools = [
     {
         name: 'QR Code Generator',
-        description: 'Fully featured, no-account QR code generator with local-first customization and PNG or SVG export.',
+        description: 'Create custom QR codes with logo uploads, colors, shapes, PNG export, and SVG export. Runs locally in your browser.',
         href: '/tools/qr-code-generator',
-        tag: 'Local browser tool'
-    }
-];
-
-const freeTools = [
+    },
     {
         name: 'DR Tracker',
-        description: 'Track Domain Rating changes while you build backlinks and launch new projects.',
-        href: '/tools/dr-tracker',
-        tag: 'SEO'
+        description: 'Track Domain Rating snapshots for domains you are growing.',
+        href: '/tools/dr-tracker/app',
     },
     {
         name: 'DomainDetails',
-        description: 'WHOIS, RDAP, DNS, SSL, marketplace search, browser extension, and domain intelligence tools.',
-        href: '/tools/domain-details',
-        tag: 'Domains'
+        description: 'Research domains with WHOIS, RDAP, DNS, SSL, marketplace, extension, and API tools.',
+        href: 'https://www.domaindetails.com?ref=simplebytes',
+    },
+    {
+        name: 'IconBuddy',
+        description: 'Find and customize open-source icons across hundreds of icon sets.',
+        href: 'https://www.iconbuddy.com?ref=simplebytes',
     },
     {
         name: 'OG Image Tester',
-        description: 'Preview and debug Open Graph images before sharing a page on social platforms.',
-        href: '/tools/og-image-tester',
-        tag: 'Publishing'
+        description: 'Preview social link cards before publishing a page.',
+        href: 'https://ogimagepreview.com?ref=simplebytes',
     },
     {
-        name: 'Launchpage.xyz',
-        description: 'Free and open-source landing pages for newly registered domains.',
-        href: '/tools/launchpage',
-        tag: 'Launch'
-    }
+        name: 'LaunchPage.xyz',
+        description: 'Add a clean placeholder site to a new domain while the real product is being built.',
+        href: 'https://launchpage.xyz?ref=simplebytes',
+    },
+    {
+        name: 'DR Launcher',
+        description: 'Directory and backlink launch workflows for early-stage sites.',
+        href: 'https://www.drlauncher.com?ref=simplebytes',
+    },
 ];
 ---
 
 <BaseLayout
-    title="Free Tools by Simple Bytes"
-    description="Browse free tools from Simple Bytes, including a local-first QR code generator, DR tracker, DomainDetails, OG image tester, and launch page tools."
+    title="Tools - Simple Bytes"
+    description="Free tools from Simple Bytes — QR code generator, DR tracker, OG image tester, and LaunchPage."
+    structuredData={{
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Tools by Simple Bytes",
+        "itemListElement": tools.map((tool, index) => ({
+            "@type": "ListItem",
+            "position": index + 1,
+            "name": tool.name,
+            "url": tool.href.startsWith('http') ? tool.href : `https://simplebytes.com${tool.href}`
+        }))
+    }}
 >
     <section class="hero">
-        <p class="section-label">Tools</p>
-        <h1>Free tools by Simple Bytes</h1>
-        <p class="tagline">
-            Focused utilities for domains, SEO, launch work, and web publishing. Free, fast, and built without account walls.
-        </p>
+        <h1>Tools</h1>
+        <p class="tagline">Pick a tool and start using it. No sign-up required.</p>
     </section>
 
-    <section class="tool-section">
-        <div class="section-heading">
-            <h2>Local-first tools</h2>
-            <p>Run directly in the browser without uploading your work.</p>
-        </div>
-        <div class="tool-grid">
-            {localTools.map((tool) => (
-                <a href={tool.href} class="tool-card">
-                    <span>{tool.tag}</span>
-                    <h3>{tool.name}</h3>
-                    <p>{tool.description}</p>
-                </a>
-            ))}
-        </div>
-    </section>
-
-    <section class="tool-section">
-        <div class="section-heading">
-            <h2>More free tools</h2>
-            <p>Additional utilities from Simple Bytes.</p>
-        </div>
-        <div class="tool-grid">
-            {freeTools.map((tool) => (
-                <a href={tool.href} class="tool-card">
-                    <span>{tool.tag}</span>
-                    <h3>{tool.name}</h3>
-                    <p>{tool.description}</p>
-                </a>
-            ))}
-        </div>
+    <section class="tool-list" aria-label="Simple Bytes tools">
+        {tools.map((tool) => (
+            <a class="tool-card" href={tool.href}>
+                <h3>{tool.name}</h3>
+                <p>{tool.description}</p>
+                <span class="tool-cta">Launch &rarr;</span>
+            </a>
+        ))}
     </section>
 </BaseLayout>
 
 <style>
     .hero {
-        margin-bottom: 3rem;
-        max-width: 680px;
+        margin-bottom: 2.5rem;
     }
 
     h1 {
         font-size: clamp(2rem, 5vw, 2.75rem);
         font-weight: 600;
-        line-height: 1.15;
+        line-height: 1.2;
+        letter-spacing: -0.03em;
         color: var(--text-primary);
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
     }
 
-    .tagline,
-    .section-heading p {
+    .tagline {
         color: var(--text-secondary);
-        line-height: 1.65;
+        font-size: 1.1rem;
+        line-height: 1.6;
     }
 
-    .tool-section {
-        margin-bottom: 3rem;
-    }
-
-    .section-heading {
-        margin-bottom: 1.25rem;
-    }
-
-    .section-heading h2 {
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin-bottom: 0.35rem;
-    }
-
-    .tool-grid {
+    .tool-list {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
     }
 
     .tool-card {
         display: flex;
         flex-direction: column;
-        min-height: 100%;
+        min-height: 200px;
         padding: 1.25rem;
         background: var(--card-bg);
         border: 1px solid var(--border-color);
         border-radius: var(--radius-lg);
-        text-decoration: none;
         color: inherit;
+        text-decoration: none;
         box-shadow: var(--shadow-sm);
-        transition: border-color 0.2s var(--transition), box-shadow 0.2s var(--transition), transform 0.2s var(--transition);
+        transition: border-color 0.2s var(--transition), transform 0.2s var(--transition), box-shadow 0.2s var(--transition);
     }
 
     .tool-card:hover {
@@ -143,31 +117,34 @@ const freeTools = [
         transform: translateY(-2px);
     }
 
-    .tool-card span {
-        width: fit-content;
-        font-family: 'Geist Mono', monospace;
-        font-size: 0.6875rem;
-        color: var(--text-tertiary);
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        margin-bottom: 0.8rem;
-    }
-
     .tool-card h3 {
-        font-size: 1.125rem;
+        margin: 0 0 0.5rem;
+        font-size: 1.2rem;
         font-weight: 600;
         color: var(--text-primary);
-        margin-bottom: 0.45rem;
     }
 
     .tool-card p {
+        flex: 1;
         color: var(--text-secondary);
+        font-size: 0.9375rem;
         line-height: 1.55;
     }
 
-    @media (max-width: 720px) {
-        .tool-grid {
+    .tool-cta {
+        margin-top: 1.2rem;
+        color: var(--text-primary);
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    @media (max-width: 640px) {
+        .tool-list {
             grid-template-columns: 1fr;
+        }
+
+        .tool-card {
+            min-height: 0;
         }
     }
 </style>

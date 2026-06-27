@@ -15,11 +15,11 @@ const features = [
     title="OG Image Tester - Simple Bytes"
     description="Test and preview Open Graph images for social media sharing. See exactly how your links will appear on Twitter, Facebook, LinkedIn, and more."
 >
-    <a href="/about" class="back-link">← Back to Simple Bytes portfolio</a>
+    <a href="/projects" class="back-link">← Projects</a>
 
     <section class="hero">
         <h1>OG Image Tester</h1>
-        <p class="tagline">Test and preview Open Graph images for social media sharing. See exactly how your links will appear before you share them.</p>
+        <p class="tagline">See exactly how your links will look on X, LinkedIn, Facebook, Slack, and Discord before you share them. Paste a URL, check the card, fix any issues.</p>
         <div class="hero-badges">
             <span class="badge badge--free">Free</span>
         </div>
@@ -35,7 +35,7 @@ const features = [
         <div class="features-grid">
             {features.map((feature) => (
                 <div class="feature-item">
-                    <span class="feature-icon">{feature.icon}</span>
+                    <span class="feature-marker"></span>
                     <h3 class="feature-title">{feature.title}</h3>
                     <p class="feature-description">{feature.description}</p>
                 </div>
@@ -53,7 +53,7 @@ const features = [
 
     <section class="cta-section">
         <div class="cta-content">
-            <span class="cta-icon">🖼️</span>
+            
             <h2>Perfect Your Social Previews</h2>
             <p>Don't let broken or missing Open Graph images hurt your content's reach. Test your URLs instantly and for free.</p>
             <div class="cta-links">

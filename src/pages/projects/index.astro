@@ -1,0 +1,215 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+const featured = [
+    {
+        number: '01',
+        name: 'Domain Details',
+        description: 'The complete domain intelligence platform with WHOIS lookup, marketplace search, and developer tools.',
+        href: '/projects/domain-details',
+        externalHref: 'https://www.domaindetails.com?ref=simplebytes',
+        subProjects: [
+            { name: 'Marketplace Search', icon: '🏪', href: 'https://www.domaindetails.com/marketplace?ref=simplebytes', tag: 'free' as const },
+            { name: 'Browser Extension', icon: '🧩', href: 'https://www.domaindetails.com/extension?ref=simplebytes', tag: 'free' as const },
+            { name: 'Portfolio', icon: '📁', href: 'https://portfolio.domaindetails.com?ref=simplebytes', tag: 'free' as const },
+            { name: 'Academy', icon: '🎓', href: 'https://www.domaindetails.com/academy?ref=simplebytes', tag: 'free' as const },
+            { name: 'MCP & NPM', icon: '📦', href: 'https://www.domaindetails.com/developers?ref=simplebytes', tag: 'opensource' as const },
+            { name: 'GitHub', icon: '💻', href: 'https://github.com/simplebytes-com', tag: 'opensource' as const },
+        ]
+    },
+    {
+        number: '02',
+        name: 'IconBuddy',
+        description: 'Search engine for 500K+ open-source icons across 300+ icon sets with editing tools and design integrations.',
+        href: '/projects/iconbuddy',
+        externalHref: 'https://www.iconbuddy.com?ref=simplebytes',
+        subProjects: []
+    }
+];
+
+const apps = [
+    {
+        number: '03',
+        name: 'Doodlify',
+        description: 'Turn your photos into cute, 2D flat & colorful doodles with AI. Now on iOS and Android.',
+        href: '/projects/doodlify',
+        externalHref: 'https://www.doodlify.ai?ref=simplebytes',
+        subProjects: []
+    },
+    {
+        number: '04',
+        name: 'EasyChef.ai',
+        description: 'Generate personalized recipes based on ingredients you have.',
+        href: '/projects/easychef',
+        externalHref: 'https://easychef.ai?ref=simplebytes',
+        subProjects: []
+    },
+    {
+        number: '05',
+        name: 'Migraine Manager',
+        description: 'A fast, calm, private migraine tracker — log attacks in one tap, then build a clinician-ready history.',
+        href: '/projects/migraine-manager',
+        externalHref: 'https://migrainemanager.com?ref=simplebytes',
+        subProjects: []
+    }
+];
+
+const tools = [
+    {
+        number: '06',
+        name: 'HyperTxt.ai',
+        description: 'AI brand visibility engine that turns brand knowledge and keywords into publish-ready, brand-aware SEO content.',
+        href: '/projects/hypertxt',
+        externalHref: 'https://www.hypertxt.ai?ref=simplebytes',
+        subProjects: []
+    },
+    {
+        number: '07',
+        name: 'recommended.by',
+        description: 'Easily share the things you love as simple recommendation lists.',
+        href: '/projects/recommended-by',
+        externalHref: 'https://recommended.by/?ref=simplebytes',
+        subProjects: []
+    },
+    {
+        number: '08',
+        name: 'LaunchPage.xyz',
+        description: 'Free & open source landing pages for newly registered domains.',
+        href: '/projects/launchpage',
+        externalHref: 'https://launchpage.xyz?ref=simplebytes',
+        subProjects: []
+    },
+    {
+        number: '09',
+        name: 'OG Image Tester',
+        description: 'Test and preview Open Graph images for social media sharing.',
+        href: '/projects/og-image-tester',
+        externalHref: 'https://ogimagepreview.com?ref=simplebytes',
+        subProjects: []
+    },
+    {
+        number: '10',
+        name: 'DR Launcher',
+        description: 'Curated database of 30+ directories to quickly boost your Domain Rating.',
+        href: '/projects/drlauncher',
+        externalHref: 'https://www.drlauncher.com?ref=simplebytes',
+        subProjects: []
+    },
+    {
+        number: '11',
+        name: 'QR Code Generator',
+        description: 'Free, fully featured QR code generator with no account required. It runs local-first in your browser with private logo uploads, full customization, and PNG or SVG export.',
+        href: '/tools/qr-code-generator',
+        subProjects: []
+    }
+];
+
+const groups = [
+    { label: 'Featured', description: 'Our flagship platforms.', projects: featured },
+    { label: 'Apps', description: 'Native apps for iOS and Android.', projects: apps },
+    { label: 'Tools', description: 'Focused utilities for everyday work.', projects: tools }
+];
+---
+
+<BaseLayout
+    title="Projects - Simple Bytes"
+    description="All products and projects built and operated by Simple Bytes — platforms, apps, and tools for domains, SEO, publishing, and everyday work."
+>
+    <div class="hero">
+        <h1>Projects</h1>
+        <p class="tagline">Everything we build and operate — platforms, apps, and focused tools.</p>
+    </div>
+
+    {groups.map((group) => (
+        <section class="project-group">
+            <div class="group-heading">
+                <p class="section-label">{group.label}</p>
+                <p class="group-description">{group.description}</p>
+            </div>
+            <div class="projects">
+                {group.projects.map((project) => (
+                    <ProjectCard
+                        number={project.number}
+                        name={project.name}
+                        description={project.description}
+                        href={project.href}
+                        externalHref={project.externalHref}
+                        subProjects={project.subProjects}
+                    />
+                ))}
+            </div>
+        </section>
+    ))}
+</BaseLayout>
+
+<style>
+    .hero {
+        margin-bottom: 4rem;
+    }
+
+    h1 {
+        font-size: clamp(2rem, 5vw, 2.75rem);
+        font-weight: 600;
+        line-height: 1.2;
+        letter-spacing: -0.03em;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+    }
+
+    .tagline {
+        font-size: 1.125rem;
+        color: var(--text-secondary);
+        max-width: 500px;
+        line-height: 1.6;
+    }
+
+    .project-group {
+        margin-bottom: 3.5rem;
+    }
+
+    .project-group:last-of-type {
+        margin-bottom: 0;
+    }
+
+    .group-heading {
+        margin-bottom: 1.5rem;
+    }
+
+    .group-heading .section-label {
+        margin-bottom: 0.25rem;
+    }
+
+    .group-description {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+    }
+
+    .projects {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    @media (max-width: 768px) {
+        .hero {
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+        }
+
+        .tagline {
+            font-size: 1rem;
+        }
+
+        .project-group {
+            margin-bottom: 2.5rem;
+        }
+
+        .projects {
+            gap: 1rem;
+        }
+    }
+</style>

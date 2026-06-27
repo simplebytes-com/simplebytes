@@ -1,151 +1,51 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-
-const featured = [
-    {
-        number: '01',
-        name: 'Domain Details',
-        description: 'The complete domain intelligence platform with WHOIS lookup, marketplace search, and developer tools.',
-        href: '/projects/domain-details',
-        externalHref: 'https://www.domaindetails.com?ref=simplebytes',
-        subProjects: [
-            { name: 'Marketplace Search', icon: '🏪', href: 'https://www.domaindetails.com/marketplace?ref=simplebytes', tag: 'free' as const },
-            { name: 'Browser Extension', icon: '🧩', href: 'https://www.domaindetails.com/extension?ref=simplebytes', tag: 'free' as const },
-            { name: 'Portfolio', icon: '📁', href: 'https://portfolio.domaindetails.com?ref=simplebytes', tag: 'free' as const },
-            { name: 'Academy', icon: '🎓', href: 'https://www.domaindetails.com/academy?ref=simplebytes', tag: 'free' as const },
-            { name: 'MCP & NPM', icon: '📦', href: 'https://www.domaindetails.com/developers?ref=simplebytes', tag: 'opensource' as const },
-            { name: 'GitHub', icon: '💻', href: 'https://github.com/simplebytes-com', tag: 'opensource' as const },
-        ]
-    },
-    {
-        number: '02',
-        name: 'IconBuddy',
-        description: 'Search engine for 500K+ open-source icons across 300+ icon sets with editing tools and design integrations.',
-        href: '/projects/iconbuddy',
-        externalHref: 'https://www.iconbuddy.com?ref=simplebytes',
-        subProjects: []
-    }
-];
-
-const apps = [
-    {
-        number: '03',
-        name: 'Doodlify',
-        description: 'Turn your photos into cute, 2D flat & colorful doodles with AI. Now on iOS and Android.',
-        href: '/projects/doodlify',
-        externalHref: 'https://www.doodlify.ai?ref=simplebytes',
-        subProjects: []
-    },
-    {
-        number: '04',
-        name: 'EasyChef.ai',
-        description: 'Generate personalized recipes based on ingredients you have.',
-        href: '/projects/easychef',
-        externalHref: 'https://easychef.ai?ref=simplebytes',
-        subProjects: []
-    },
-    {
-        number: '05',
-        name: 'Migraine Manager',
-        description: 'A fast, calm, private migraine tracker — log attacks in one tap, then build a clinician-ready history.',
-        href: '/projects/migraine-manager',
-        externalHref: 'https://migrainemanager.com?ref=simplebytes',
-        subProjects: []
-    }
-];
-
-const tools = [
-    {
-        number: '06',
-        name: 'HyperTxt.ai',
-        description: 'AI brand visibility engine that turns brand knowledge and keywords into publish-ready, brand-aware SEO content.',
-        href: '/projects/hypertxt',
-        externalHref: 'https://www.hypertxt.ai?ref=simplebytes',
-        subProjects: []
-    },
-    {
-        number: '07',
-        name: 'recommended.by',
-        description: 'Easily share the things you love as simple recommendation lists.',
-        href: '/projects/recommended-by',
-        externalHref: 'https://recommended.by/?ref=simplebytes',
-        subProjects: []
-    },
-    {
-        number: '08',
-        name: 'Launchpage.xyz',
-        description: 'Free & open source landing pages for newly registered domains.',
-        href: '/projects/launchpage',
-        externalHref: 'https://launchpage.xyz?ref=simplebytes',
-        subProjects: []
-    },
-    {
-        number: '09',
-        name: 'OG Image Tester',
-        description: 'Test and preview Open Graph images for social media sharing.',
-        href: '/projects/og-image-tester',
-        externalHref: 'https://ogimagepreview.com?ref=simplebytes',
-        subProjects: []
-    },
-    {
-        number: '10',
-        name: 'DR Launcher',
-        description: 'Curated database of 30+ directories to quickly boost your Domain Rating.',
-        href: '/projects/drlauncher',
-        externalHref: 'https://www.drlauncher.com?ref=simplebytes',
-        subProjects: []
-    },
-    {
-        number: '11',
-        name: 'QR Code Generator',
-        description: 'Free, fully featured QR code generator with no account required. It runs local-first in your browser with private logo uploads, full customization, and PNG or SVG export.',
-        href: '/tools/qr-code-generator',
-        subProjects: []
-    }
-];
-
-const groups = [
-    { label: 'Featured', description: 'Our flagship platforms.', projects: featured },
-    { label: 'Apps', description: 'Native apps for iOS and Android.', projects: apps },
-    { label: 'Tools', description: 'Focused utilities for everyday work.', projects: tools }
-];
 ---
 
 <BaseLayout
-    title="About Simple Bytes - Digital Tools That Respect Your Time"
-    description="Simple Bytes is a portfolio of digital products creating tiny, easy to use tools for better productivity, domains, SEO, content, and focus."
+    title="About - Simple Bytes"
+    description="Simple Bytes is an independent product studio building focused tools and apps for domains, SEO, publishing, and everyday work."
 >
     <div class="hero">
-        <h1>Simple Bytes</h1>
-        <p class="tagline">A portfolio of digital products creating tiny, easy to use tools for better productivity and focus.</p>
+        <h1>About Simple Bytes</h1>
+        <p class="tagline">An independent product studio building focused software that respects your time.</p>
     </div>
 
-    {groups.map((group) => (
-        <section class="project-group">
-            <div class="group-heading">
-                <p class="section-label">{group.label}</p>
-                <p class="group-description">{group.description}</p>
-            </div>
-            <div class="projects">
-                {group.projects.map((project) => (
-                    <ProjectCard
-                        number={project.number}
-                        name={project.name}
-                        description={project.description}
-                        href={project.href}
-                        externalHref={project.externalHref}
-                        subProjects={project.subProjects}
-                    />
-                ))}
+    <div class="content">
+        <section class="block">
+            <h2>What we do</h2>
+            <p>Simple Bytes builds and operates tools, apps, and platforms. Some we build from scratch, others we acquire and improve. Each one follows the same principle: do something useful without wasting your time.</p>
+            <p>Our products span domains, SEO, publishing, icons, cooking, health, and productivity — wherever we see a clear problem and a way to solve it simply.</p>
+        </section>
+
+        <section class="block">
+            <h2>How we work</h2>
+            <p>We keep things small and focused. No venture funding, no growth-at-all-costs. We build products we want to use ourselves, ship them, and keep improving them. If a tool can be free, it is. If a product earns revenue, that funds the next one.</p>
+            <p>We run everything ourselves — design, engineering, operations. That means we can move fast and make decisions based on what's right for the product, not what a board wants to hear.</p>
+        </section>
+
+        <section class="block">
+            <h2>What we believe</h2>
+            <ul class="values">
+                <li><strong>Useful first.</strong> Every product starts with a real problem. If we wouldn't use it ourselves, we don't build it.</li>
+                <li><strong>Simple by default.</strong> Fewer features, done well. Complexity is easy — simplicity takes work.</li>
+                <li><strong>Respect people's time.</strong> No dark patterns, no unnecessary sign-ups, no friction for friction's sake.</li>
+                <li><strong>Independent.</strong> Self-funded, self-directed. We answer to our users, not investors.</li>
+            </ul>
+        </section>
+
+        <section class="block">
+            <div class="cta-row">
+                <a href="/projects" class="btn btn--primary">See our projects</a>
+                <a href="/contact" class="btn btn--secondary">Get in touch</a>
             </div>
         </section>
-    ))}
+    </div>
 </BaseLayout>
 
 <style>
     .hero {
-        margin-bottom: 4rem;
+        margin-bottom: 3.5rem;
     }
 
     h1 {
@@ -160,40 +60,65 @@ const groups = [
     .tagline {
         font-size: 1.125rem;
         color: var(--text-secondary);
-        max-width: 500px;
+        max-width: 520px;
         line-height: 1.6;
     }
 
-    .project-group {
-        margin-bottom: 3.5rem;
+    .content {
+        max-width: 640px;
     }
 
-    .project-group:last-of-type {
+    .block {
+        margin-bottom: 3rem;
+    }
+
+    .block:last-child {
         margin-bottom: 0;
     }
 
-    .group-heading {
-        margin-bottom: 1.5rem;
+    .block h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+        letter-spacing: -0.02em;
     }
 
-    .group-heading .section-label {
-        margin-bottom: 0.25rem;
-    }
-
-    .group-description {
-        font-size: 0.875rem;
+    .block p {
         color: var(--text-secondary);
+        line-height: 1.7;
+        margin-bottom: 0.75rem;
     }
 
-    .projects {
+    .block p:last-child {
+        margin-bottom: 0;
+    }
+
+    .values {
+        list-style: none;
         display: flex;
         flex-direction: column;
-        gap: 1.25rem;
+        gap: 0.85rem;
+    }
+
+    .values li {
+        color: var(--text-secondary);
+        line-height: 1.65;
+    }
+
+    .values strong {
+        color: var(--text-primary);
+    }
+
+    .cta-row {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
     }
 
     @media (max-width: 768px) {
         .hero {
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
         }
 
         h1 {
@@ -202,14 +127,6 @@ const groups = [
 
         .tagline {
             font-size: 1rem;
-        }
-
-        .project-group {
-            margin-bottom: 2.5rem;
-        }
-
-        .projects {
-            gap: 1rem;
         }
     }
 </style>

@@ -12,6 +12,15 @@ const categoryLabels: Record<string, string> = {
     insights: 'Insights',
 };
 
+const categories = [
+    { id: 'all', label: 'All', count: posts.length },
+    ...Object.entries(categoryLabels).map(([id, label]) => ({
+        id,
+        label,
+        count: posts.filter((post) => post.data.category === id).length,
+    })).filter((category) => category.count > 0),
+];
+
 function formatDate(dateStr: string) {
     return new Date(dateStr).toLocaleDateString('en-US', {
         year: 'numeric',
@@ -23,18 +32,37 @@ function formatDate(dateStr: string) {
 
 <BaseLayout
     title="Blog - Simple Bytes"
-    description="News, product updates, and insights from Simple Bytes."
+    description="Product notes, acquisition announcements, launch updates, and operating lessons from Simple Bytes."
+    structuredData={{
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "Simple Bytes Blog",
+        "url": "https://simplebytes.com/blog",
+        "description": "Product notes, acquisition announcements, launch updates, and operating lessons from Simple Bytes."
+    }}
 >
-    <a href="/" class="back-link">← Back to home</a>
-
     <section class="hero">
         <h1>Blog</h1>
-        <p class="tagline">News, product updates, and insights from Simple Bytes.</p>
+        <p class="tagline">Product notes, acquisition announcements, launch updates, and operating lessons from Simple Bytes.</p>
     </section>
 
-    <div class="posts">
+    <div class="filters" role="tablist" aria-label="Filter blog posts">
+        {categories.map((category) => (
+            <button
+                type="button"
+                class="filter-tab"
+                data-filter={category.id}
+                aria-pressed={category.id === 'all' ? 'true' : 'false'}
+            >
+                <span>{category.label}</span>
+                <em>{category.count}</em>
+            </button>
+        ))}
+    </div>
+
+    <div class="posts" data-post-list>
         {posts.map((post) => (
-            <a href={`/blog/${post.id}`} class="post-card">
+            <a href={`/blog/${post.id}`} class="post-card" data-category={post.data.category}>
                 <div class="post-meta">
                     <span class="post-category">{categoryLabels[post.data.category] || post.data.category}</span>
                     <span class="post-date">{formatDate(post.data.date)}</span>
@@ -44,26 +72,47 @@ function formatDate(dateStr: string) {
             </a>
         ))}
     </div>
+
+    <script>
+        const filterButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-filter]'));
+        const postCards = Array.from(document.querySelectorAll<HTMLElement>('[data-category]'));
+
+        function setFilter(filter: string) {
+            filterButtons.forEach((button) => {
+                const active = button.dataset.filter === filter;
+                button.setAttribute('aria-pressed', active ? 'true' : 'false');
+            });
+
+            postCards.forEach((card) => {
+                const visible = filter === 'all' || card.dataset.category === filter;
+                card.hidden = !visible;
+            });
+        }
+
+        filterButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                const filter = button.dataset.filter || 'all';
+                setFilter(filter);
+                const url = new URL(window.location.href);
+                if (filter === 'all') {
+                    url.searchParams.delete('category');
+                } else {
+                    url.searchParams.set('category', filter);
+                }
+                window.history.replaceState({}, '', url);
+            });
+        });
+
+        const initialFilter = new URLSearchParams(window.location.search).get('category') || 'all';
+        if (filterButtons.some((button) => button.dataset.filter === initialFilter)) {
+            setFilter(initialFilter);
+        }
+    </script>
 </BaseLayout>
 
 <style>
-    .back-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 0.875rem;
-        color: var(--text-secondary);
-        text-decoration: none;
-        margin-bottom: 2rem;
-        transition: color 0.2s;
-    }
-
-    .back-link:hover {
-        color: var(--text-primary);
-    }
-
     .hero {
-        margin-bottom: 3rem;
+        margin-bottom: 1.75rem;
     }
 
     h1 {
@@ -77,6 +126,42 @@ function formatDate(dateStr: string) {
         font-size: 1.125rem;
         color: var(--text-secondary);
         line-height: 1.6;
+    }
+
+    .filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .filter-tab {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.55rem 0.75rem;
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-sm);
+        color: var(--text-secondary);
+        cursor: pointer;
+        font: inherit;
+        font-size: 0.875rem;
+        transition: border-color 0.2s var(--transition), color 0.2s var(--transition), background-color 0.2s var(--transition);
+    }
+
+    .filter-tab:hover,
+    .filter-tab[aria-pressed="true"] {
+        color: var(--text-primary);
+        border-color: var(--border-hover);
+        background: var(--accent-subtle);
+    }
+
+    .filter-tab em {
+        font-style: normal;
+        font-family: 'Geist Mono', monospace;
+        font-size: 0.75rem;
+        color: var(--text-tertiary);
     }
 
     .posts {
@@ -93,6 +178,10 @@ function formatDate(dateStr: string) {
         border-radius: var(--radius-lg);
         text-decoration: none;
         transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .post-card[hidden] {
+        display: none;
     }
 
     .post-card:hover {
@@ -148,6 +237,10 @@ function formatDate(dateStr: string) {
 
         .post-card {
             padding: 1.25rem;
+        }
+
+        .post-meta {
+            flex-wrap: wrap;
         }
 
         .post-title {

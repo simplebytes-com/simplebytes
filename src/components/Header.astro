@@ -5,19 +5,38 @@
     <a href="/" class="logo-link" aria-label="Simple Bytes Home">
         <img src="/svg/logo.svg" alt="Simple Bytes" class="logo">
     </a>
-    <div class="header-right">
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <div class="header-right" id="primary-nav">
         <a href="/tools" class="header-link">Tools</a>
+        <a href="/projects" class="header-link">Projects</a>
         <a href="/about" class="header-link">About</a>
         <a href="/blog" class="header-link">Blog</a>
         <button class="theme-toggle" role="switch" aria-checked="false" aria-label="Toggle dark mode"></button>
     </div>
 </header>
 
+<script>
+    const menuToggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+    const primaryNav = document.querySelector<HTMLElement>('#primary-nav');
+
+    menuToggle?.addEventListener('click', () => {
+        const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+        menuToggle.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+        primaryNav?.toggleAttribute('data-open', !isOpen);
+    });
+</script>
+
 <style>
     .header {
+        position: relative;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 1rem;
         margin-bottom: 4rem;
         padding-top: 0.5rem;
     }
@@ -40,6 +59,7 @@
         display: flex;
         align-items: center;
         gap: 1rem;
+        flex: 0 0 auto;
     }
 
     .header-link {
@@ -51,6 +71,48 @@
 
     .header-link:hover {
         color: var(--text-primary);
+    }
+
+    .menu-toggle {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 4px;
+        width: 34px;
+        height: 34px;
+        padding: 0;
+        background: transparent;
+        border: 1px solid var(--border-color);
+        border-radius: 999px;
+        color: var(--text-primary);
+        cursor: pointer;
+        transition: border-color 0.2s var(--transition), background-color 0.2s var(--transition);
+    }
+
+    .menu-toggle span {
+        width: 13px;
+        height: 1px;
+        background: var(--text-primary);
+        transition: transform 0.2s var(--transition), opacity 0.2s var(--transition);
+    }
+
+    .menu-toggle:hover,
+    .menu-toggle[aria-expanded="true"] {
+        border-color: var(--border-hover);
+        background: var(--accent-subtle);
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(1) {
+        transform: translateY(5px) rotate(45deg);
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(3) {
+        transform: translateY(-5px) rotate(-45deg);
     }
 
     .theme-toggle {
@@ -90,6 +152,70 @@
     @media (max-width: 768px) {
         .header {
             margin-bottom: 3rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .header {
+            gap: 0.75rem;
+            align-items: flex-start;
+        }
+
+        .logo {
+            height: 18px;
+            max-width: 118px;
+            margin-top: 0.45rem;
+        }
+
+        .menu-toggle {
+            display: inline-flex;
+            margin-left: auto;
+        }
+
+        .header-right {
+            position: absolute;
+            top: calc(100% + 0.75rem);
+            right: 0;
+            z-index: 10;
+            display: none;
+            min-width: 180px;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0;
+            padding: 0.45rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+        }
+
+        .header-right[data-open] {
+            display: flex;
+        }
+
+        .header-link {
+            padding: 0.65rem 0.7rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.8125rem;
+        }
+
+        .header-link:hover {
+            background: var(--accent-subtle);
+        }
+
+        .theme-toggle {
+            margin: 0.45rem 0.7rem 0.2rem;
+            width: 42px;
+            height: 24px;
+        }
+
+        .theme-toggle::before {
+            width: 16px;
+            height: 16px;
+        }
+
+        .theme-toggle[aria-checked="true"]::before {
+            transform: translateY(-50%) translateX(18px);
         }
     }
 </style>

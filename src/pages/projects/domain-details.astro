@@ -96,7 +96,7 @@ const successStories = [
     title="Domain Details - Simple Bytes"
     description="Free private domain lookup using RDAP & WHOIS. Check registration, ownership, expiration, DNS records, and marketplace availability."
 >
-    <a href="/about" class="back-link">← Back to Simple Bytes portfolio</a>
+    <a href="/projects" class="back-link">← Projects</a>
 
     <section class="hero">
         <h1>Domain Details</h1>
@@ -122,7 +122,7 @@ const successStories = [
         <div class="sub-projects-grid">
             {subProjects.map((sub) => (
                 <a href={sub.href} target="_blank" rel="noopener" class="sub-project-card">
-                    <span class="sub-project-icon">{sub.icon}</span>
+                    <span class="feature-marker"></span>
                     <h3 class="sub-project-name">{sub.name}</h3>
                     <p class="sub-project-description">{sub.description}</p>
                     <span class={`tag tag--${sub.tag}`}>
@@ -138,7 +138,7 @@ const successStories = [
         <div class="features-grid">
             {features.map((feature) => (
                 <div class="feature-item">
-                    <span class="feature-icon">{feature.icon}</span>
+                    <span class="feature-marker"></span>
                     <h3 class="feature-title">{feature.title}</h3>
                     <p class="feature-description">{feature.description}</p>
                 </div>
@@ -148,7 +148,7 @@ const successStories = [
 
     <section class="opensource-section">
         <div class="opensource-header">
-            <span class="opensource-icon">💻</span>
+            
             <h2>Open Source & Developer Tools</h2>
         </div>
         <p class="opensource-description">
@@ -156,7 +156,7 @@ const successStories = [
         </p>
         <div class="opensource-links">
             <a href="https://www.npmjs.com/org/domaindetails" target="_blank" rel="noopener" class="btn btn--secondary">
-                📦 NPM Packages
+                NPM Packages
             </a>
             <a href="https://github.com/simplebytes-com" target="_blank" rel="noopener" class="btn btn--secondary">
                 GitHub

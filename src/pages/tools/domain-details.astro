@@ -1,23 +1,119 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ExternalToolLanding from '../../components/ExternalToolLanding.astro';
+
+const features = [
+    'WHOIS, RDAP, DNS, SSL, and registrar lookups in one place.',
+    'Marketplace search across major domain listing venues.',
+    'Browser extension, portfolio tools, Academy, and developer APIs.',
+    'Built and operated by Simple Bytes as a full domain intelligence product.'
+];
 ---
 
 <BaseLayout
-    title="DomainDetails - Free Domain Research Tools"
-    description="Use DomainDetails for WHOIS, RDAP, DNS, SSL, marketplace search, portfolio tools, browser extension, and developer-friendly domain intelligence."
+    title="DomainDetails - Domain Research Tools by Simple Bytes"
+    description="DomainDetails is the Simple Bytes domain intelligence platform for WHOIS, RDAP, DNS, SSL, marketplace search, portfolio tools, browser extension, and developer APIs."
 >
-    <ExternalToolLanding
-        label="Domain Research"
-        name="DomainDetails"
-        description="DomainDetails brings WHOIS, RDAP, DNS, SSL, and marketplace search into one domain research toolkit - with a browser extension for on-the-go lookups."
-        href="https://www.domaindetails.com?ref=simplebytes"
-        cta="Open DomainDetails"
-        features={[
-            'Look up registration, nameservers, expiration, and registrar data.',
-            'Search domain marketplaces and compare where a domain is listed.',
-            'Use free tools like the browser extension and DomainDetails Academy.',
-            'A major Simple Bytes product with enough depth to deserve a tools-level entry.'
-        ]}
-    />
+    <a href="/tools" class="back-link">← Tools</a>
+
+    <section class="tool-hero">
+        <p class="section-label">Domain Intelligence</p>
+        <h1>DomainDetails</h1>
+        <p class="tagline">
+            DomainDetails is our domain research platform: fast lookups, marketplace checks, portfolio workflows, and developer tools for people who work with domains regularly.
+        </p>
+        <div class="hero-actions">
+            <a href="https://www.domaindetails.com?ref=simplebytes" target="_blank" rel="noopener" class="btn btn--primary">Launch DomainDetails →</a>
+            <a href="/projects/domain-details" class="btn btn--secondary">Read portfolio page</a>
+        </div>
+    </section>
+
+    <section class="detail-panel">
+        <h2>What it covers</h2>
+        <div class="feature-list">
+            {features.map((feature) => (
+                <div class="feature-item">
+                    <span></span>
+                    <p>{feature}</p>
+                </div>
+            ))}
+        </div>
+    </section>
 </BaseLayout>
+
+<style>
+    .back-link {
+        display: inline-flex;
+        color: var(--text-secondary);
+        text-decoration: none;
+        margin-bottom: 2rem;
+        font-size: 0.875rem;
+    }
+
+    .back-link:hover {
+        color: var(--text-primary);
+    }
+
+    .tool-hero {
+        max-width: 760px;
+        margin-bottom: 2.5rem;
+    }
+
+    h1 {
+        font-size: clamp(2.4rem, 5vw, 3.5rem);
+        font-weight: 650;
+        line-height: 1.08;
+        margin-bottom: 1rem;
+    }
+
+    .tagline {
+        color: var(--text-secondary);
+        font-size: 1.125rem;
+        line-height: 1.7;
+    }
+
+    .hero-actions {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        margin-top: 1.5rem;
+    }
+
+    .detail-panel {
+        padding: 1.5rem;
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+    }
+
+    .detail-panel h2 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+
+    .feature-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.9rem;
+    }
+
+    .feature-item {
+        display: flex;
+        gap: 0.7rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+    }
+
+    .feature-item span {
+        width: 1rem;
+        height: 2px;
+        flex: 0 0 auto;
+        margin-top: 0.75rem;
+        background: var(--border-hover);
+    }
+
+    @media (max-width: 700px) {
+        .feature-list {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
