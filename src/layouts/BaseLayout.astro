@@ -8,13 +8,15 @@ interface Props {
     description?: string;
     image?: string;
     structuredData?: Record<string, unknown> | Record<string, unknown>[];
+    noindex?: boolean;
 }
 
 const {
     title,
     description = "A portfolio of digital products creating tiny, easy to use tools for better productivity and focus.",
     image = "/img/og-image.png",
-    structuredData: pageStructuredData
+    structuredData: pageStructuredData,
+    noindex = false
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, "https://simplebytes.com");
@@ -46,7 +48,7 @@ const structuredDataItems = [
     <title>{title}</title>
     <meta name="description" content={description}>
     <meta name="author" content="Simple Bytes">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content={noindex ? "noindex, follow" : "index, follow"}>
     <link rel="canonical" href={canonicalURL}>
 
     <!-- Open Graph -->

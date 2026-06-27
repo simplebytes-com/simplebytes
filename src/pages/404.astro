@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+    title="Page not found - Simple Bytes"
+    description="This Simple Bytes page could not be found."
+    noindex
+>
+    <section class="not-found" aria-labelledby="not-found-heading">
+        <p class="section-label">404</p>
+        <h1 id="not-found-heading">Page not found</h1>
+        <p class="tagline">This page does not exist, or it may have moved.</p>
+        <div class="cta-row">
+            <a href="/" class="btn btn--primary">Go home</a>
+            <a href="/projects" class="btn btn--secondary">Browse projects</a>
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+    .not-found {
+        max-width: 560px;
+        padding: 5rem 0;
+    }
+
+    h1 {
+        color: var(--text-primary);
+        font-size: clamp(2rem, 5vw, 2.75rem);
+        font-weight: 600;
+        line-height: 1.2;
+        margin: 0 0 1rem;
+    }
+
+    .tagline {
+        color: var(--text-secondary);
+        font-size: 1.125rem;
+        line-height: 1.6;
+        margin: 0 0 1.75rem;
+    }
+
+    .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+</style>
