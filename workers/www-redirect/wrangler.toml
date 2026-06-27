@@ -1,0 +1,7 @@
+name = "simplebytes-www-redirect"
+main = "www-to-apex.js"
+compatibility_date = "2026-06-27"
+
+routes = [
+  { pattern = "www.simplebytes.com/*", zone_name = "simplebytes.com" }
+]

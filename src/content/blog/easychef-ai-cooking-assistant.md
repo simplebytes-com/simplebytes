@@ -1,6 +1,6 @@
 ---
-title: "Introducing EasyChef.ai — Our First Acquisition"
-description: "We acquired EasyChef.ai, an AI-powered cooking assistant that turns whatever's in your kitchen into personalized recipes."
+title: "EasyChef.ai AI Cooking Assistant Joins Simple Bytes"
+description: "EasyChef.ai is an AI cooking assistant for iOS, Android, and web that turns ingredients you already have into personalized recipes."
 date: "2025-09-10"
 category: "acquisition"
 ---
