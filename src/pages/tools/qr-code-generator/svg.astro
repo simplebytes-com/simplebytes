@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const title = 'SVG QR Code Generator - Free Scalable QR Codes';
+const description = 'Create scalable SVG QR codes for free. Customize colors, dots, corners, logos, and export vector QR codes for print, web, and design tools.';
+
+const useCases = [
+    { title: 'Print design', description: 'SVG QR codes stay sharp on flyers, posters, packaging, signs, and business cards.' },
+    { title: 'Web and app UI', description: 'Use SVG when you need a lightweight QR code that scales cleanly across screen sizes.' },
+    { title: 'Design tools', description: 'Import SVG QR codes into Figma, Illustrator, or other tools without losing quality.' }
+];
+
+const faqs = [
+    {
+        question: 'What is an SVG QR code?',
+        answer: 'An SVG QR code is a vector QR code. It can scale up or down without becoming blurry like a low-resolution image.'
+    },
+    {
+        question: 'Is SVG better than PNG for QR codes?',
+        answer: 'SVG is usually better for print, web layouts, and design tools. PNG is simpler for screenshots, quick sharing, and apps that do not accept SVG.'
+    },
+    {
+        question: 'Can an SVG QR code include a logo?',
+        answer: 'Yes. The Simple Bytes generator can export SVG QR codes with custom colors, shapes, and an optional logo.'
+    }
+];
+
+const structuredData = [
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqs.map((item) => ({
+            "@type": "Question",
+            "name": item.question,
+            "acceptedAnswer": { "@type": "Answer", "text": item.answer }
+        }))
+    }
+];
+---
+
+<BaseLayout title={title} description={description} structuredData={structuredData}>
+    <a href="/tools/qr-code-generator" class="back-link">← QR Code Generator</a>
+
+    <section class="hero">
+        <p class="section-label">QR Code Guide</p>
+        <h1>SVG QR Code Generator</h1>
+        <p class="tagline">
+            Export scalable vector QR codes for print, web, and design work. SVG QR codes stay crisp at any size and work well when you need a professional file format.
+        </p>
+        <div class="hero-actions">
+            <a href="/tools/qr-code-generator/" class="btn btn--primary">Create SVG QR code</a>
+            <a href="/tools/qr-code-generator/with-logo" class="btn btn--secondary">QR code with logo</a>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>When to use SVG QR codes</h2>
+        <div class="cards">
+            {useCases.map((item) => (
+                <div class="card">
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                </div>
+            ))}
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>PNG vs SVG QR codes</h2>
+        <div class="compare">
+            <div class="card">
+                <h3>Use PNG for quick sharing</h3>
+                <p>PNG is easy to upload, email, and paste into simple documents. It is a good default for everyday QR code sharing.</p>
+            </div>
+            <div class="card">
+                <h3>Use SVG for scalable quality</h3>
+                <p>SVG is best when the QR code needs to stay sharp at different sizes or move through a design workflow.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>SVG QR code FAQ</h2>
+        <div class="faq-list">
+            {faqs.map((item) => (
+                <div class="card">
+                    <h3>{item.question}</h3>
+                    <p>{item.answer}</p>
+                </div>
+            ))}
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+    .back-link { display: inline-flex; color: var(--text-secondary); text-decoration: none; margin-bottom: 2rem; font-size: 0.875rem; }
+    .back-link:hover { color: var(--text-primary); }
+    .hero { max-width: 780px; margin-bottom: 3rem; }
+    h1 { color: var(--text-primary); font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 650; line-height: 1.1; margin-bottom: 1rem; }
+    .tagline { color: var(--text-secondary); font-size: 1.125rem; line-height: 1.7; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+    .content-section { margin-bottom: 3.5rem; }
+    .content-section h2 { font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; }
+    .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+    .compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    .card { border: 1px solid var(--border-color); border-radius: var(--radius-lg); background: var(--card-bg); padding: 1.25rem; }
+    .card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .card p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; }
+    .faq-list { display: grid; gap: 1rem; max-width: 820px; }
+    @media (max-width: 760px) { .cards, .compare { grid-template-columns: 1fr; } }
+</style>

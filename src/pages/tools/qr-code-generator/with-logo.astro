@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const title = 'QR Code Generator With Logo - Free Custom QR Codes';
+const description = 'Create a QR code with a logo for free. Learn how to keep branded QR codes scannable, choose error correction, and download PNG or SVG files.';
+
+const tips = [
+    { title: 'Use high error correction', description: 'A logo covers part of the QR code, so high error correction gives scanners more room to recover the data.' },
+    { title: 'Keep the logo centered', description: 'A centered logo is easier to scan than one placed over the finder patterns in the corners.' },
+    { title: 'Leave enough contrast', description: 'Dark QR dots on a light background usually scan best, even when the design uses brand colors.' }
+];
+
+const faqs = [
+    {
+        question: 'Can I put a logo inside a QR code?',
+        answer: 'Yes. A QR code can include a centered logo as long as enough code area remains visible and error correction is high enough.'
+    },
+    {
+        question: 'What logo size works best for QR codes?',
+        answer: 'Start around 15-20% of the QR code width. Larger logos can work, but they need more error correction and should be tested on real phones.'
+    },
+    {
+        question: 'Does Simple Bytes upload my logo?',
+        answer: 'No. Logo previews are handled locally in your browser and are not uploaded to Simple Bytes.'
+    }
+];
+
+const structuredData = [
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to create a QR code with a logo",
+        "description": "Create a branded QR code with a centered logo and export it as PNG or SVG.",
+        "step": [
+            { "@type": "HowToStep", "name": "Open the generator", "text": "Open the Simple Bytes QR code generator and choose the content type." },
+            { "@type": "HowToStep", "name": "Upload a logo", "text": "Upload a PNG, JPG, SVG, or WebP logo file. The file stays local in your browser." },
+            { "@type": "HowToStep", "name": "Set error correction", "text": "Use high error correction when the logo is large or the QR code will be printed." },
+            { "@type": "HowToStep", "name": "Download", "text": "Download the finished QR code as PNG or SVG." }
+        ]
+    },
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqs.map((item) => ({
+            "@type": "Question",
+            "name": item.question,
+            "acceptedAnswer": { "@type": "Answer", "text": item.answer }
+        }))
+    }
+];
+---
+
+<BaseLayout title={title} description={description} structuredData={structuredData}>
+    <a href="/tools/qr-code-generator" class="back-link">← QR Code Generator</a>
+
+    <section class="hero">
+        <p class="section-label">QR Code Guide</p>
+        <h1>QR Code Generator With Logo</h1>
+        <p class="tagline">
+            Add a logo to a custom QR code without giving up scan reliability. The Simple Bytes generator keeps logo files in your browser and exports branded QR codes as PNG or SVG.
+        </p>
+        <div class="hero-actions">
+            <a href="/tools/qr-code-generator/" class="btn btn--primary">Create QR code with logo</a>
+            <a href="/tools/qr-code-generator/svg" class="btn btn--secondary">SVG QR codes</a>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>How to make a QR code with a logo</h2>
+        <div class="steps">
+            <div><span>1</span><h3>Add content</h3><p>Enter a URL, WiFi network, vCard, email, SMS, phone number, or plain text.</p></div>
+            <div><span>2</span><h3>Upload the logo</h3><p>Use PNG, JPG, SVG, or WebP. Logo files are processed locally and never uploaded.</p></div>
+            <div><span>3</span><h3>Test and export</h3><p>Use higher error correction, scan the result on a phone, then download PNG or SVG.</p></div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>Logo QR code tips</h2>
+        <div class="cards">
+            {tips.map((tip) => (
+                <div class="card">
+                    <h3>{tip.title}</h3>
+                    <p>{tip.description}</p>
+                </div>
+            ))}
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>QR code with logo FAQ</h2>
+        <div class="faq-list">
+            {faqs.map((item) => (
+                <div class="card">
+                    <h3>{item.question}</h3>
+                    <p>{item.answer}</p>
+                </div>
+            ))}
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+    .back-link { display: inline-flex; color: var(--text-secondary); text-decoration: none; margin-bottom: 2rem; font-size: 0.875rem; }
+    .back-link:hover { color: var(--text-primary); }
+    .hero { max-width: 780px; margin-bottom: 3rem; }
+    h1 { color: var(--text-primary); font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 650; line-height: 1.1; margin-bottom: 1rem; }
+    .tagline { color: var(--text-secondary); font-size: 1.125rem; line-height: 1.7; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+    .content-section { margin-bottom: 3.5rem; }
+    .content-section h2 { font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; }
+    .cards, .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+    .card, .steps div { border: 1px solid var(--border-color); border-radius: var(--radius-lg); background: var(--card-bg); padding: 1.25rem; }
+    .card h3, .steps h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .card p, .steps p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; }
+    .steps span { display: inline-flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; margin-bottom: 1rem; border-radius: 50%; background: var(--accent); color: var(--bg-color); font-weight: 600; }
+    .faq-list { display: grid; gap: 1rem; max-width: 820px; }
+    @media (max-width: 760px) { .cards, .steps { grid-template-columns: 1fr; } }
+</style>

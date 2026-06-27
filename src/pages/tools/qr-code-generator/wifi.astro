@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const title = 'WiFi QR Code Generator - Share Network Access Fast';
+const description = 'Create a WiFi QR code for free. Generate QR codes for WPA, WEP, hidden, or open networks and download PNG or SVG files.';
+
+const tips = [
+    { title: 'Use the exact network name', description: 'WiFi QR codes rely on the SSID matching the network name exactly, including spaces and capitalization.' },
+    { title: 'Choose the right security type', description: 'Most modern networks use WPA or WPA2. Choose no password only for open guest networks.' },
+    { title: 'Print a backup copy', description: 'A WiFi QR code works well on a front desk, rental welcome card, office wall, or event sign.' }
+];
+
+const faqs = [
+    {
+        question: 'What is a WiFi QR code?',
+        answer: 'A WiFi QR code stores a network name, security type, password, and hidden-network flag so phones can join the network after scanning.'
+    },
+    {
+        question: 'Does the WiFi password get uploaded?',
+        answer: 'No. The Simple Bytes QR code generator creates the WiFi payload in your browser and does not upload your network name or password.'
+    },
+    {
+        question: 'Can I make a QR code for a hidden WiFi network?',
+        answer: 'Yes. The generator includes a hidden network option for WiFi QR codes.'
+    }
+];
+
+const structuredData = [
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to create a WiFi QR code",
+        "description": "Create a WiFi QR code for a WPA, WEP, open, or hidden network.",
+        "step": [
+            { "@type": "HowToStep", "name": "Choose WiFi", "text": "Open the Simple Bytes QR code generator with WiFi mode selected." },
+            { "@type": "HowToStep", "name": "Enter network details", "text": "Enter the network name, password, security type, and hidden network setting." },
+            { "@type": "HowToStep", "name": "Download", "text": "Download the WiFi QR code as PNG or SVG." }
+        ]
+    },
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqs.map((item) => ({
+            "@type": "Question",
+            "name": item.question,
+            "acceptedAnswer": { "@type": "Answer", "text": item.answer }
+        }))
+    }
+];
+---
+
+<BaseLayout title={title} description={description} structuredData={structuredData}>
+    <a href="/tools/qr-code-generator" class="back-link">← QR Code Generator</a>
+
+    <section class="hero">
+        <p class="section-label">QR Code Guide</p>
+        <h1>WiFi QR Code Generator</h1>
+        <p class="tagline">
+            Create a WiFi QR code for guests, customers, rentals, offices, and events. Enter the network details locally, customize the design, then download a PNG or SVG.
+        </p>
+        <div class="hero-actions">
+            <a href="/tools/qr-code-generator/?type=wifi" class="btn btn--primary">Create WiFi QR code</a>
+            <a href="/tools/qr-code-generator/with-logo" class="btn btn--secondary">Add a logo</a>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>How to create a WiFi QR code</h2>
+        <div class="steps">
+            <div><span>1</span><h3>Choose WiFi mode</h3><p>Open the generator with WiFi selected as the QR code content type.</p></div>
+            <div><span>2</span><h3>Enter network details</h3><p>Add the SSID, password, security type, and hidden network option if needed.</p></div>
+            <div><span>3</span><h3>Download and test</h3><p>Download the code and scan it with a phone before printing or sharing.</p></div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>WiFi QR code tips</h2>
+        <div class="cards">
+            {tips.map((tip) => (
+                <div class="card">
+                    <h3>{tip.title}</h3>
+                    <p>{tip.description}</p>
+                </div>
+            ))}
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>WiFi QR code FAQ</h2>
+        <div class="faq-list">
+            {faqs.map((item) => (
+                <div class="card">
+                    <h3>{item.question}</h3>
+                    <p>{item.answer}</p>
+                </div>
+            ))}
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+    .back-link { display: inline-flex; color: var(--text-secondary); text-decoration: none; margin-bottom: 2rem; font-size: 0.875rem; }
+    .back-link:hover { color: var(--text-primary); }
+    .hero { max-width: 780px; margin-bottom: 3rem; }
+    h1 { color: var(--text-primary); font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 650; line-height: 1.1; margin-bottom: 1rem; }
+    .tagline { color: var(--text-secondary); font-size: 1.125rem; line-height: 1.7; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+    .content-section { margin-bottom: 3.5rem; }
+    .content-section h2 { font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; }
+    .cards, .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+    .card, .steps div { border: 1px solid var(--border-color); border-radius: var(--radius-lg); background: var(--card-bg); padding: 1.25rem; }
+    .card h3, .steps h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .card p, .steps p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; }
+    .steps span { display: inline-flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; margin-bottom: 1rem; border-radius: 50%; background: var(--accent); color: var(--bg-color); font-weight: 600; }
+    .faq-list { display: grid; gap: 1rem; max-width: 820px; }
+    @media (max-width: 760px) { .cards, .steps { grid-template-columns: 1fr; } }
+</style>
